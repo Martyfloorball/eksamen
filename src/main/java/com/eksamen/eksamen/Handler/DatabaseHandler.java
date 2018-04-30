@@ -3,7 +3,7 @@ package com.eksamen.eksamen.Handler;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DatabaseHelper {
+public class DatabaseHandler {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://35.205.120.189/rodovre";
     private static Connection connection;
@@ -11,12 +11,12 @@ public class DatabaseHelper {
     private static Statement statement;
     private static ResultSet resultSet;
 
-    private static DatabaseHelper ourInstance = new DatabaseHelper();
-    public static DatabaseHelper getInstance() {
+    private static DatabaseHandler ourInstance = new DatabaseHandler();
+    public static DatabaseHandler getInstance() {
         return ourInstance;
     }
 
-    private DatabaseHelper() {
+    private DatabaseHandler() {
         try {
             Class.forName(JDBC_DRIVER);
 
