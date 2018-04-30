@@ -47,12 +47,12 @@ public class EmailHandler {
   public void createMessage(String to, String subject, String text) {
     try {
 
-      Message message = new MimeMessage(session);
+      MimeMessage message = new MimeMessage(session);
       //message.setFrom(new InternetAddress(from));
       message.setRecipients(Message.RecipientType.TO,
         InternetAddress.parse(to));
       message.setSubject(subject);
-      message.setText(text);
+      message.setText(text, "UTF-8", "HTML");
 
       Transport.send(message);
 

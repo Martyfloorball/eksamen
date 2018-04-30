@@ -8,6 +8,6 @@ public class EksamenApplication {
 
     public static void main(String[] args) {
         //SpringApplication.run(EksamenApplication.class, args);
-      EmailHandler.getInstance().createMessage("developerteam1234@gmail.com", "testSub", "Singe" );
+      EmailHandler.getInstance().createMessage("marco@romeri.dk", "testSub", "<h1>Bøgse</h1><hr><p>Singe</p>" );
     }
 }
