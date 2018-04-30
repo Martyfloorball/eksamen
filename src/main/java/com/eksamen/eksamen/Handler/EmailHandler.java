@@ -1,4 +1,4 @@
-package com.eksamen.eksamen;
+package com.eksamen.eksamen.Handler;
 
 import java.net.UnknownHostException;
 import java.util.Properties;
@@ -14,17 +14,27 @@ import javax.mail.internet.MimeMessage;
 public class EmailHandler {
   private final String username = "developerteam1234@gmail.com";
   private final String password = "Test1379";
-  Session session;
+  private Session session;
 
-  public EmailHandler() {
+  private static EmailHandler ourInstance = new EmailHandler();
+  public static EmailHandler getInstance() {
+    return ourInstance;
+  }
+
+
+  private EmailHandler() {
 
 
     Properties props = new Properties();
-
+    // Mail config
     props.put("mail.smtp.auth", "true");
     props.put("mail.smtp.starttls.enable", "true");
     props.put("mail.smtp.host", "smtp.gmail.com");
-    props.put("mail.sfmtp.port", "587");
+    props.put("mail.sfmtp.port", "465");
+    // SSL config
+    props.put("mail.smtp.socketFactory.port", "465");
+    props.put("mail.smtp.socketFactory.class",
+      "javax.net.ssl.SSLSocketFactory");
 
     session = Session.getInstance(props,
       new javax.mail.Authenticator() {
@@ -34,24 +44,22 @@ public class EmailHandler {
       });
   }
 
-  public void message() {
+  public void createMessage(String to, String subject, String text) {
     try {
 
       Message message = new MimeMessage(session);
-      message.setFrom(new InternetAddress("from-email@gmail.com"));
+      //message.setFrom(new InternetAddress(from));
       message.setRecipients(Message.RecipientType.TO,
-        InternetAddress.parse("developerteam1234@gmail.com"));
-      message.setSubject("spam");
-      message.setText("Dear Mail Crawler,"
-        + "\n\n No spam to my email, please! HEj martin");
+        InternetAddress.parse(to));
+      message.setSubject(subject);
+      message.setText(text);
 
       Transport.send(message);
-
 
       System.out.println("Done");
 
     } catch (MessagingException e) {
-      // throw new RuntimeException(e);
+       throw new RuntimeException(e);
     }
   }
 }
