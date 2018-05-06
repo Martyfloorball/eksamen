@@ -20,6 +20,14 @@ h1 strong {
     padding-top: 1.5rem;
 }
 
+h2 {
+    font-weight: normal;
+    border-bottom: 1px solid #333;
+    color: #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
 label {
     font-weight: bold;
     font-size: 1rem;
@@ -43,6 +51,10 @@ a {
     font-weight: normal;
 }
 
+img {
+    display: block;
+}
+
 .container {
     width: 100%;
     padding-top: 0.5rem;
@@ -63,6 +75,13 @@ a {
     padding: 0.25rem 0.5rem;
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+}
+
 .row:not(:last-child) {
     margin-bottom: 0.5rem;
 }
@@ -73,8 +92,8 @@ a {
 }
 
 .row .col-2 {
-    flex: 0 0 16.67%;
-    max-width: 16.67%;
+    flex: 0 0 16.66%;
+    max-width: 16.66%;
 }
 
 .row .col-3 {
@@ -88,8 +107,8 @@ a {
 }
 
 .row .col-5 {
-    flex: 0 0 41.67%;
-    max-width: 41.67%;
+    flex: 0 0 41.66%;
+    max-width: 41.66%;
 }
 
 .row .col-6 {
@@ -103,8 +122,8 @@ a {
 }
 
 .row .col-8 {
-    flex: 0 0 66.67%;
-    max-width: 66.67%;
+    flex: 0 0 66.66%;
+    max-width: 66.66%;
 }
 
 .row .col-9 {
@@ -191,6 +210,10 @@ a {
     text-align: right;
 }
 
+.text-color-dark-grey {
+    color: #333;
+}
+
 .btn {
     color: #fff;
     padding: 10px 20px;
@@ -219,4 +242,56 @@ a {
 
 .pull-right {
     float: right;
+}
+
+.padding-0 {
+    padding: 0 !important;
+}
+
+.padding-1 {
+    padding: 0.5rem !important;
+}
+
+.padding-2 {
+    padding: 1rem !important;
+}
+
+.padding-3 {
+    padding: 1.5rem !important;
+}
+
+.padding-4 {
+    padding: 2rem !important;
+}
+
+.padding-5 {
+    padding: 2.5rem !important;
+}
+
+.padding-6 {
+    padding: 3rem !important;
+}
+
+.block {
+    display: block;
+}
+
+.margin-left-1 {
+    margin-left: 1rem;
+}
+
+.padding-top-1 {
+    padding-top: 0.5rem !important;
+}
+
+.padding-bottom-1 {
+    padding-bottom: 0.5rem !important;
+}
+
+.font-size-2 {
+    font-size: 2em;
+}
+
+.bg-blue {
+    background-color: #4285F4;
 }
