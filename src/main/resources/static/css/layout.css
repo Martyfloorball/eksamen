@@ -318,6 +318,10 @@ ul {
     background-color: #4285F4;
 }
 
+.bg-white {
+    background-color: #fff;
+}
+
 .pull-left {
     float: left;
 }
