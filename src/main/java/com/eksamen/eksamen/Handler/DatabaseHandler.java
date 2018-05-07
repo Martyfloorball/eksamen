@@ -102,7 +102,6 @@ public class DatabaseHandler {
 
     public ResultSet select(String table, String column, String where, String order, int limit, String group, String having) {
         String sql = "SELECT "+column+" FROM "+table+" "+where+" "+group+" "+having+" "+order+" "+(limit == 0 ? "" : limit);
-
         try {
             resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {

@@ -27,24 +27,23 @@ public class SessionController {
       }
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", params = "login-submit")
     public String loginSubmit(@RequestParam("email") String email, @RequestParam("password") String password) {
-      password = new BCryptPasswordEncoder().encode(password);
-
       try {
         ResultSet resultSet = DatabaseHandler.getInstance().select("staff",
-            "COUNT(staff_id) AS total, staff_id, fk_staff_niveau_id",
-            "WHERE email = '"+email+"' AND password = '"+password+"'",
+            "staff_id, fk_staff_niveau_id, password",
+            "WHERE email = '"+email+"'",
             "",
             0,
-            "",
+            "GROUP BY staff_id",
             "");
-        if(resultSet.getInt(1) == 1){
-          Session.setId(resultSet.getInt(2));
-          Session.setUserniveau(resultSet.getInt(3));
+
+        if(resultSet.next() && new BCryptPasswordEncoder().matches(email+password, resultSet.getString("password"))){
+          Session.setId(resultSet.getInt("staff_id"));
+          Session.setUserniveau(resultSet.getInt("fk_staff_niveau_id"));
           failure = "";
           return "redirect:/";
-        }else{
+        } else{
           failure = "Ugyldigt login";
         }
       } catch (SQLException e) {
