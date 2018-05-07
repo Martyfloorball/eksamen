@@ -55,6 +55,10 @@ img {
     display: block;
 }
 
+ul {
+    list-style-type: none;
+}
+
 .container {
     width: 100%;
     padding-top: 0.5rem;
@@ -198,6 +202,12 @@ img {
     border-radius: 35px;
 }
 
+.img-circle-40 {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
 .center {
     margin: 0 auto;
 }
@@ -212,6 +222,10 @@ img {
 
 .text-color-dark-grey {
     color: #333;
+}
+
+.text-color-white {
+    color: #fff;
 }
 
 .btn {
@@ -288,10 +302,22 @@ img {
     padding-bottom: 0.5rem !important;
 }
 
+.font-size-1-25 {
+    font-size: 1.25em;
+}
+
+.font-size-1 {
+    font-size: 1.5em;
+}
+
 .font-size-2 {
     font-size: 2em;
 }
 
 .bg-blue {
     background-color: #4285F4;
+}
+
+.pull-left {
+    float: left;
 }

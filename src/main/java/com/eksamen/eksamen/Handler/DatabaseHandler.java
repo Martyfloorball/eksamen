@@ -99,27 +99,17 @@ public class DatabaseHandler {
     public void delete() {
 
     }
-    public void select() {
 
-    }
-
-    public ArrayList<String> getColumns(String table) {
-        ArrayList<String> columns = new ArrayList<>();
+    public ResultSet select(String table, String column, String where, String order, int limit, String group, String having) {
+        String sql = "SELECT "+column+" FROM "+table+" "+where+" "+group+" "+having+" "+order+" "+limit;
 
         try {
-            resultSet = statement.executeQuery("SHOW COLUMNS FROM "+table);
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-            int counter = 1;
-
-            while(resultSet.next()) {
-                System.out.println(resultSetMetaData.getColumnTypeName(counter));
-                counter++;
-            }
+            resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
-            System.out.println("Something went really wrong!");
+            System.out.println("Something went wrong!");
         }
 
-        return columns;
+        return resultSet;
     }
 
     public void close() {
