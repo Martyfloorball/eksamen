@@ -3,9 +3,7 @@ package com.eksamen.eksamen.Controller;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @Controller
 public class HomeController {
