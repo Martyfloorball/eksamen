@@ -112,6 +112,16 @@ public class DatabaseHandler {
         return resultSet;
     }
 
+    public ResultSet selectAll(String table){
+        try {
+            resultSet = statement.executeQuery("select * from " + table);
+        } catch (SQLException e) {
+            System.out.println("Something went wrong!");
+        }
+
+        return resultSet;
+    }
+
     public void close() {
         try {
             if(preparedStatement != null) { preparedStatement.close(); }
