@@ -15,14 +15,7 @@ public class HomeController {
 
     @GetMapping("/medarbejderliste")
     public String employeeList(){
-        ResultSet rs = DatabaseHandler.getInstance()
-          .selectAll("staff");
-        try {
-            while (rs.next())
-            System.out.println(rs.getString("firstname"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return "employeeList";
     }
+
 }

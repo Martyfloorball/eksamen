@@ -10,11 +10,29 @@
 
     <!---JQUERY--->
     <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="js/employeeList.js"></script>
 </head>
+<script>
+      $(document).ready(function () {
+        $.ajax({
+          type: "POST",
+          url: "/getEmployees",
+          success: function (data) {
+            $.each(data, function (key,value) {
+              $('#table').append('<tr><td>'+value+'</td></tr>')
+            });
+          }
+        })
+      });
+
+</script>
 <body>
 
 <div th:replace="/topMenu::topMenu"></div>
 
+<table id="table">
+
+</table>
 
 
 
