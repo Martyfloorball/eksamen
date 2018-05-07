@@ -16,4 +16,8 @@ public class HomeController {
         return "employeeList";
     }
 
+    @GetMapping("/profile")
+    public String profile(){
+        return "dashboard/profile";
+    }
 }

@@ -12,6 +12,12 @@
 
         <!---JQUERY--->
         <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#profile,#settings").hide();
+
+            });
+        </script>
     </head>
     <body>
         <div class="container-raw" >
@@ -21,17 +27,17 @@
                 <div class="col-8 padding-1">
                     <ul class="">
                         <li class="pull-left">
-                            <a href="/" class="font-size-1-raw text-color-dark-grey padding-1 block margin-right-1 active">
+                            <a href="shifts" class="font-size-1-raw text-color-dark-grey padding-1 block margin-right-1 active">
                                 <i class="fa fa-calendar-alt"></i> Vagter
                             </a>
                         </li>
                         <li class="pull-left">
-                            <a href="" class="font-size-1-raw text-color-dark-grey padding-1 margin-right-1 block">
+                            <a href="profile" class="font-size-1-raw text-color-dark-grey padding-1 margin-right-1 block">
                                 <i class="fa fa-user"></i> Profil
                             </a>
                         </li>
                         <li class="pull-left">
-                            <a href="medarbejderliste" class="font-size-1-raw text-color-dark-grey padding-1 block">
+                            <a href="settings" class="font-size-1-raw text-color-dark-grey padding-1 block">
                                 <i class="fa fa-cog"></i> Indstillinger
                             </a>
                         </li>
@@ -41,17 +47,11 @@
             </div>
         </div>
         <div class="container" style="margin-top: 125px;">
-            <div class="row">
+            <div class="row" id="dashboard">
                 <div class="col-2"></div>
-                <div class="col-8">
-                    <h2>Søndag den. 6 maj 2018 - Idag</h2>
-                    <h2>Mandag den. 7 maj 2018 - Imorgen</h2>
-                    <h2>Tirsdag den. 8 maj 2018</h2>
-                    <h2>Onsdag den. 9 maj 2018</h2>
-                    <h2>Torsdag den. 10 maj 2018</h2>
-                    <h2>Fredag den. 11 maj 2018</h2>
-                    <h2>Lørdag den. 12 maj 2018</h2>
-                </div>
+                <div th:replace="dashboard/shifts::shifts"></div>
+                <div th:replace="dashboard/profile::profile"></div>
+                <div th:replace="dashboard/settings::settings"></div>
                 <div class="col-2"></div>
             </div>
         </div>
