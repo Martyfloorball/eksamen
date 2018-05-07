@@ -1,5 +1,6 @@
 package com.eksamen.eksamen.Controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SessionController {
     @GetMapping("/login")
     public String login() {
-    return "login";
-  }
+        return "login";
+    }
 }
