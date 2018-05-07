@@ -2,6 +2,8 @@ package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
+import com.eksamen.eksamen.Handler.EmailHandler;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 @Controller
 public class SessionController {
     String failure = "";
+    String message = "";
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -61,8 +64,33 @@ public class SessionController {
       return "redirect:/";
     }
 
-    @PostMapping("/forgot-password")
+    @PostMapping(value = "/forgot-password", params = "forgot-submit")
     public String forgotSubmit(@RequestParam("email") String email) {
+      try {
+        ResultSet resultSet = DatabaseHandler.getInstance().select("staff",
+            "staff_id, fk_staff_niveau_id, password",
+            "WHERE email = '"+email+"'",
+            "",
+            0,
+            "GROUP BY staff_id",
+            "");
+
+        if(resultSet.next()){
+          String characters = "ABCDEFGHJKMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz023456789";
+          String newPassword = RandomStringUtils.random( 10, characters );
+          EmailHandler.getInstance().createMessage("developerteam1234@gmail.com","New Password", "Her er dit nye password: "+newPassword);
+
+          failure = "";
+          message = "Email sendes til din email.";
+          return "redirect:/login";
+        } else{
+          failure = "Email findes ikke.";
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+
+
       return "redirect:/forgot-password";
     }
 }
