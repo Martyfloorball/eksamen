@@ -1,4 +1,8 @@
 package com.eksamen.eksamen.Base;
 
-public class Worker {
+public class Worker extends Staff{
+  @Override
+  public int getStaffNiveau() {
+    return super.getStaffNiveau() + 3;
+  }
 }
