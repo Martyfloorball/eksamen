@@ -2,6 +2,7 @@ package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
