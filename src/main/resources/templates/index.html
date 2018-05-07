@@ -14,25 +14,25 @@
         <script src="lib/jquery/jquery-3.3.1.min.js"></script>
     </head>
     <body>
-        <div class="container-raw">
+        <div class="container-raw" >
             <div th:replace="includes/topMenu::topMenu"></div>
-            <div class="row padding-0 bg-white">
+            <div class="row bg-white box-shadow" id="submenu">
                 <div class="col-2 padding-top-1 padding-bottom-1"></div>
-                <div class="col-8 padding-0">
-                    <ul>
+                <div class="col-8 padding-1">
+                    <ul class="">
                         <li class="pull-left">
-                            <a href="/" class="font-size-1-25 text-color-dark-grey padding-2 block">
-                                <i class="fa fa-tachometer-alt"></i> Dashboard
+                            <a href="/" class="font-size-1-raw text-color-dark-grey padding-1 block margin-right-1 active">
+                                <i class="fa fa-calendar-alt"></i> Vagter
                             </a>
                         </li>
                         <li class="pull-left">
-                            <a href="" class="font-size-1-25 text-color-dark-grey padding-2 block">
-                                <i class="fa fa-calendar-alt"></i> Vagtplan
+                            <a href="" class="font-size-1-raw text-color-dark-grey padding-1 margin-right-1 block">
+                                <i class="fa fa-user"></i> Profil
                             </a>
                         </li>
                         <li class="pull-left">
-                            <a href="medarbejderliste" class="font-size-1-25 text-color-dark-grey padding-2 block">
-                                <i class="fa fa-users"></i> Medarbejdere
+                            <a href="medarbejderliste" class="font-size-1-raw text-color-dark-grey padding-1 block">
+                                <i class="fa fa-cog"></i> Indstillinger
                             </a>
                         </li>
                     </ul>
@@ -40,7 +40,7 @@
                 <div class="col-2 padding-top-1 padding-bottom-1"></div>
             </div>
         </div>
-        <div class="container">
+        <div class="container" style="margin-top: 125px;">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
