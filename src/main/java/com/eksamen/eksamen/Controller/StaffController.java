@@ -1,6 +1,7 @@
 package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Handler.DatabaseHandler;
+import com.eksamen.eksamen.Handler.EmailHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

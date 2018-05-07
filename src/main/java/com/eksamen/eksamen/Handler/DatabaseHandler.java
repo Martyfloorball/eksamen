@@ -104,7 +104,6 @@ public class DatabaseHandler {
         String sql = "SELECT "+column+" FROM "+table+" "+where+" "+group+" "+having+" "+order+" "+(limit == 0 ? "" : limit);
         try {
             resultSet = statement.executeQuery(sql);
-            resultSet.close();
         } catch (SQLException e) {
             System.out.println("Something went wrong!");
         }
@@ -115,7 +114,6 @@ public class DatabaseHandler {
     public ResultSet selectAll(String table){
         try {
             resultSet = statement.executeQuery("select * from " + table);
-            resultSet.close();
         } catch (SQLException e) {
             System.out.println("Something went wrong!");
         }
