@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class DatabaseHandler {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://35.205.120.189/rodovre";
+    private static final String DATABASE_URL = "jdbc:mysql://35.205.120.189/rodovre?useSSL=false";
     private static final String USERNAME = "free";
     private static final String PASSWORD = "test1234";
     private static Connection connection;
