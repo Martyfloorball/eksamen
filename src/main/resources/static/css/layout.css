@@ -357,3 +357,21 @@ ul {
     top: 62px;
     z-index: 10;
 }
+.margin-top-125px{
+    margin-top: 125px;
+}
+.margin-top-65px{
+    margin-top: 65px;
+}
+.list{
+    width: 100%;
+}
+
+.list td{
+    padding: 0.5rem;
+}
+
+.list tr:nth-child(even) {
+    background-color: #eeeeee;
+    border-radius: 5px;
+}

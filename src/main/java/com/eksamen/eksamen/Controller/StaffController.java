@@ -1,5 +1,6 @@
 package com.eksamen.eksamen.Controller;
 
+import com.eksamen.eksamen.Base.Staff;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
 import com.eksamen.eksamen.Handler.EmailHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +16,17 @@ public class StaffController {
 
   @PostMapping("/getEmployees")
   public ArrayList getEmployeeList(){
+    ArrayList<String> staffs  = new ArrayList<>();
 
     try {
       ResultSet rs = DatabaseHandler.getInstance().selectAll("staff");
-      while (rs.next())
-        System.out.println(rs.getString("firstname"));
+      while (rs.next()){
+        staffs.add(rs.getString("firstname") + " " + rs.getString("lastname"));
+      }
 
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return new ArrayList<>(Arrays.asList(1,2,3,4));
+    return staffs;
   }
 }
