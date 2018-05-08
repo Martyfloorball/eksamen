@@ -20,17 +20,16 @@ public class StaffController {
     ArrayList<String> columnLabels = new ArrayList<>();
 
     try {
-      ResultSet rs = DatabaseHandler.getInstance().querySelect(" select\n" +
-        "firstname as Fornavn,\n" +
-        "lastname as Efternavn,\n" +
-        "phone as Telefonnummer,\n" +
-        "email as Email,\n" +
-        "location_name as Anlæg,\n" +
-        "niveau_name as Stilling\n" +
-        "from staff\n" +
-        "inner join staff_location l on staff.staff_id = l.fk_staff_id\n" +
-        "inner join staff_niveau n on staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
-        "inner join location l2 on l.fk_location_id = l2.location_id;");
+      ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT\n" +
+        "CONCAT(CONCAT(firstname, ' '),lastname) AS Navn,\n" +
+        "phone AS Telefonnummer,\n" +
+        "email AS Email,\n" +
+        "location_name AS Anlæg,\n" +
+        "niveau_name AS Stilling\n" +
+        "FROM staff\n" +
+        "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id\n" +
+        "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
+        "INNER JOIN location l2 ON l.fk_location_id = l2.location_id;");
 
       for (int i = 1; i < rs.getMetaData().getColumnCount() +1; i++) {
         columnLabels.add(rs.getMetaData().getColumnLabel(i));

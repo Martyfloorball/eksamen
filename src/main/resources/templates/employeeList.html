@@ -13,6 +13,18 @@
     <script src="js/employeeList.js"></script>
 </head>
 
+<style>
+    .green-btn {
+        color: white;
+        background: #4FD33B;
+        border: 1px solid #4FD33B;
+        width: 100%;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: medium;
+    }
+</style>
+
 <body>
 
 <div th:replace="/includes/topMenu::topMenu"></div>
@@ -20,13 +32,38 @@
 
 <div class="container margin-top-65px">
     <div class="row padding-0">
-        <div class="col-2"></div>
+        <div class="col-2">
+            <div class="row padding-0">
+                <div class="container">
+                    <div>
+                        <div>
+                            <button type="submit" class="green-btn"
+                                    id="openCreateNewEmployee">Opret Medarbejder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padding-0">
+                <div class="container">
+                    <div class="box">
+                        <div class="box-body">
+                            <h2>Filtrér Anlæg:</h2>
+                            <input type="checkbox" name="checkbox-espelunden" value="Espelunden">Espelunden
+                            Idrætsanlæg<br/>
+                            <input type="checkbox" name="checkbox-islevbadet" value="Islevbadet">Islevbadet<br/>
+                            <input type="checkbox" name="checkbox-skøjtearena" value="Skøjtearena">Skøjte Arena<br/>
+                            <input type="checkbox" name="checkbox-stadionhal" value="Stadionhal">Stadionhal<br/>
+                            <input type="checkbox" name="checkbox-rødovrehallen" value="Rødovrehallen">Rødovrehallen
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-8 padding-0">
             <div class="box">
-                <div class="box-header"><h2>Hello!?!?!?!?!??!+1</h2></div>
+                <div class="box-header"><h2>Medarbejderliste</h2></div>
                 <div class="box-body">
                     <table id="table" class="list">
-
 
                     </table>
                 </div>
