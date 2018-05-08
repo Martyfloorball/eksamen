@@ -21,21 +21,20 @@ public class StaffController {
 
     try {
       ResultSet rs = DatabaseHandler.getInstance().querySelect(" select\n" +
-        "firstname,\n" +
-        "lastname,\n" +
-        "phone,\n" +
-        "email,\n" +
-        "location_name,\n" +
-        "niveau_name\n" +
+        "firstname as Fornavn,\n" +
+        "lastname as Efternavn,\n" +
+        "phone as Telefonnummer,\n" +
+        "email as Email,\n" +
+        "location_name as Anlæg,\n" +
+        "niveau_name as Stilling\n" +
         "from staff\n" +
         "inner join staff_location l on staff.staff_id = l.fk_staff_id\n" +
         "inner join staff_niveau n on staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
         "inner join location l2 on l.fk_location_id = l2.location_id;");
 
-      for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+      for (int i = 1; i < rs.getMetaData().getColumnCount() +1; i++) {
         columnLabels.add(rs.getMetaData().getColumnLabel(i));
       }
-
       staffs.add(columnLabels);
 
       while (rs.next()) {
