@@ -15,13 +15,36 @@ import java.util.Arrays;
 public class StaffController {
 
   @PostMapping("/getEmployees")
-  public ArrayList getEmployeeList(){
-    ArrayList<String> staffs  = new ArrayList<>();
+  public ArrayList getEmployeeList() {
+    ArrayList<ArrayList<String>> staffs = new ArrayList<>();
+    ArrayList<String> columnLabels = new ArrayList<>();
 
     try {
-      ResultSet rs = DatabaseHandler.getInstance().selectAll("staff");
-      while (rs.next()){
-        staffs.add(rs.getString("firstname") + " " + rs.getString("lastname"));
+      ResultSet rs = DatabaseHandler.getInstance().querySelect(" select\n" +
+        "firstname,\n" +
+        "lastname,\n" +
+        "phone,\n" +
+        "email,\n" +
+        "location_name,\n" +
+        "niveau_name\n" +
+        "from staff\n" +
+        "inner join staff_location l on staff.staff_id = l.fk_staff_id\n" +
+        "inner join staff_niveau n on staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
+        "inner join location l2 on l.fk_location_id = l2.location_id;");
+
+      for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+        columnLabels.add(rs.getMetaData().getColumnLabel(i));
+      }
+
+      staffs.add(columnLabels);
+
+      while (rs.next()) {
+        ArrayList<String> staff = new ArrayList<>();
+
+        for (int i = 1; i < columnLabels.size() + 1; i++) {
+          staff.add(rs.getString(i));
+        }
+        staffs.add(staff);
       }
 
     } catch (Exception e) {

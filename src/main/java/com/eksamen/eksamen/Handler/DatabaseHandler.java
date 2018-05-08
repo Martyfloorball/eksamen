@@ -120,6 +120,15 @@ public class DatabaseHandler {
 
         return resultSet;
     }
+  public ResultSet querySelect(String query){
+    try {
+      resultSet = statement.executeQuery(query);
+    } catch (SQLException e) {
+      System.out.println("Something went wrong!");
+    }
+
+    return resultSet;
+  }
 
     public void close() {
         try {
