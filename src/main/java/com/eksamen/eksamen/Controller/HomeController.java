@@ -16,6 +16,7 @@ public class HomeController {
         return "/index";
     }
 
+
     private String[] getWeekNames() {
         Calendar calendar = Calendar.getInstance();
 

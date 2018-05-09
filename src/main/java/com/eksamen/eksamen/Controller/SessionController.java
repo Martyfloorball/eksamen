@@ -30,6 +30,17 @@ public class SessionController {
       }
     }
 
+    @GetMapping("/profile")
+    public String profile(){
+        return "user/profile";
+    }
+
+    @GetMapping("/settings")
+    public String settings(){
+        return "user/settings";
+    }
+
+
     @PostMapping(value = "/login", params = "login-submit")
     public String loginSubmit(@RequestParam("email") String email, @RequestParam("password") String password) {
       try {

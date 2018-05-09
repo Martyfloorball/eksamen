@@ -6,7 +6,8 @@
             <tr>
                 <td></td>
                 <td>
-                    <button id="cancelEmployeeCreate" type="button" class="pull-right bg-white"><i class="fas fa-times"></i> </button>
+                    <button id="cancelEmployeeCreate" type="button" class="pull-right bg-white"><i
+                            class="fas fa-times"></i></button>
                 </td>
             </tr>
             <tr></tr>
@@ -38,13 +39,23 @@
             <tr>
                 <td><label for="employeePosition">Stilling:</label></td>
                 <td>
-                    <select id="employeePosition" name="staffPosition" class="pull-right" th:field="${employee.staffNiveau}">
+                    <select id="employeePosition" name="staffPosition" class="pull-right"
+                            th:field="${employee.staffNiveau}">
                         <option value="15">Medarbejder</option>
                         <option value="16">Centerleder</option>
                         <option value="17">Admin</option>
                     </select>
                 </td>
             </tr>
+            <tr><td><label>Anlæg:</label></td></tr>
+            <th:block th:each="location : ${locations}">
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" th:text="${location.locationName}" th:value="${location.locationId}"/>
+                    </td>
+                </tr>
+            </th:block>
             <tr>
                 <td><label for="employeePassword">Adgangskode:</label></td>
                 <td>
