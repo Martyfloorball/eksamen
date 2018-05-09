@@ -1,4 +1,5 @@
 <div id="menu" th:fragment="topMenu" xmlns:th="http://www.w3.org/1999/xhtml">
+    <script src="js/dropdownTopMenu.js"></script>
     <ul>
         <li>
             <a href="/" class="active">
@@ -14,6 +15,14 @@
             <a href="medarbejderliste">
                 <i class="fa fa-users"></i>Medarbejdere
             </a>
+        </li>
+        <li>
+            <a>Mit navn <i class="fa fa-caret-down"></i></a>
+                <div class="dropdown">
+                    <a href="/profile">Profil</a>
+                    <a href="/settings">Instillinger</a>
+                    <a href="/login">Log ud</a>
+                </div>
         </li>
     </ul>
 </div>

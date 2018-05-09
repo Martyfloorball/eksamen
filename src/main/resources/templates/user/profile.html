@@ -1,45 +1,62 @@
-<div class="col-8 panel" id="profile-trigger" th:fragment="profile" style="display: none" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="row">
-        <div class="col-6">
-            <img src="https://placehold.it/300x300" class="center img-circle-300" />
+<!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="lib/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
+
+        <title>RKI | Log ind</title>
+
+        <!---CSS--->
+        <link rel="stylesheet" href="css/layout.css" type="text/css"/>
+
+        <!---JQUERY--->
+        <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+        <div th:replace="includes/topMenu::topMenu"></div>
+        <div class="row">
+            <div class="col-6">
+                <img src="https://placehold.it/300x300" class="center img-circle-300"/>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="fornavn">Fornavn</label>
+                        <input type="text" id="fornavn" disabled>
+                    </div>
+                    <div class="col-6">
+                        <label for="efternavn">Efternavn</label>
+                        <input type="text" id="efternavn" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="email">E-mail</label>
+                        <input type="text" id="email" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="telefon">Telefon</label>
+                        <input type="text" id="telefon" disabled>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="lokation">Lokation</label>
+                        <input type="text" id="lokation" disabled>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="stilling">Stilling</label>
+                        <input type="text" id="stilling" disabled>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-            <div class="row">
-                <div class="col-6">
-                    <label for="fornavn">Fornavn</label>
-                    <input type="text" id="fornavn" disabled>
-                </div>
-                <div class="col-6">
-                    <label for="efternavn">Efternavn</label>
-                    <input type="text" id="efternavn" disabled>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="email">E-mail</label>
-                    <input type="text" id="email" disabled>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="telefon">Telefon</label>
-                    <input type="text" id="telefon" disabled>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12">
-                    <label for="lokation">Lokation</label>
-                    <input type="text" id="lokation" disabled>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12">
-                    <label for="stilling">Stilling</label>
-                    <input type="text" id="stilling" disabled>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </body>
+</html>
