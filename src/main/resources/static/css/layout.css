@@ -21,11 +21,9 @@ h1 strong {
 }
 
 h2 {
-    font-weight: normal;
-    border-bottom: 1px solid #333;
     color: #333;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
+    font-size: 20px;
+    text-align: center;
 }
 
 hr{
@@ -359,18 +357,6 @@ ul {
 .box-shadow {
     box-shadow: 0 3px 3px #aaa;
 }
-
-#menu {
-    position: absolute;
-    top: 0;
-    z-index: 20;
-}
-
-#submenu {
-    position: absolute;
-    top: 62px;
-    z-index: 10;
-}
 .margin-top-125px{
     margin-top: 125px;
 }
@@ -426,7 +412,7 @@ ul {
     list-style-type: none;
 }
 
-#menu ul li {
+#menu ul li, #submenu ul li {
     float: left;
 }
 
@@ -435,7 +421,7 @@ ul {
     font-size: 18px;
     line-height: 18px;
     display: block;
-    padding: 14.5px 15px;
+    padding: 14px 15px;
     border-bottom: 3px solid #007bff;
 }
 
@@ -445,4 +431,17 @@ ul {
 
 #menu ul li a i {
     margin-right: 10px;
+}
+
+#dashboard-week {
+    margin: 20px 0;
+}
+
+#dashboard-week .day {
+    width: calc(94% / 7);
+    float: left;
+}
+
+#dashboard-week .day:not(:last-child) {
+    margin-right: 1%;
 }

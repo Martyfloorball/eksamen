@@ -1812,7 +1812,7 @@ chart-line:
       - graph
       - analytics
       - line-chart
-      - dashboard
+      - user
   styles:
     - solid
   unicode: f201
@@ -2365,7 +2365,7 @@ columns:
     terms:
       - split
       - panes
-      - dashboard
+      - user
   styles:
     - solid
   unicode: f0db
@@ -8673,7 +8673,7 @@ tachometer-alt:
   search:
     terms:
       - tachometer
-      - dashboard
+      - user
   styles:
     - solid
   unicode: f3fd
