@@ -105,6 +105,7 @@ public class DatabaseHandler {
         try {
             resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Something went wrong!");
         }
 
@@ -115,6 +116,7 @@ public class DatabaseHandler {
         try {
             resultSet = statement.executeQuery("select * from " + table);
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Something went wrong!");
         }
 
@@ -124,6 +126,7 @@ public class DatabaseHandler {
     try {
       resultSet = statement.executeQuery(query);
     } catch (SQLException e) {
+        e.printStackTrace();
       System.out.println("Something went wrong!");
     }
 
