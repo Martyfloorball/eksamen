@@ -1,4 +1,13 @@
 $(document).ready(function () {
+
+    $("#openCreateNewEmployee").click(function () {
+        $("#overlay, #createNewEmployee").show();
+    });
+
+    $("#cancelEmployeeCreate, #overlay").click(function () {
+        $("#overlay, .popup-formular").hide();
+    });
+
   $.ajax({
     type: "POST",
     url: "/getEmployees",

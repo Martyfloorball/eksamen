@@ -1,0 +1,60 @@
+<div id="createNewEmployee" class="popup-formular box-body" th:fragment="createNewEmployee"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <form method="post" th:action="@{/medarbejderliste}" id="createEmployeeForm">
+
+        <table class="popup-table">
+            <tr>
+                <td></td>
+                <td>
+                    <button id="cancelEmployeeCreate" type="button" class="pull-right bg-white"><i class="fas fa-times"></i> </button>
+                </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="employeeFirstName">Fornavn:</label></td>
+                <td>
+                    <input id="employeeFirstName" name="firstName" type="text" th:field="${employee.firstName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="employeeLastName">Efternavn:</label></td>
+                <td>
+                    <input id="employeeLastName" name="lastName" type="text" th:field="${employee.lastName}"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="employeePhoneNumber">Tlf. nr.:</label></td>
+                <td>
+                    <input id="employeePhoneNumber" name="phonenumber" type="text" th:field="${employee.phonenumber}"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="employeeEmail">Email:</label></td>
+                <td>
+                    <input id="employeeEmail" name="email" type="email" th:field="${employee.email}"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="employeePosition">Stilling:</label></td>
+                <td>
+                    <select id="employeePosition" name="staffPosition" class="pull-right" th:field="${employee.staffNiveau}">
+                        <option value="15">Medarbejder</option>
+                        <option value="16">Centerleder</option>
+                        <option value="17">Admin</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="employeePassword">Adgangskode:</label></td>
+                <td>
+                    <input id="employeePassword" name="password" type="password" th:field="${employee.password}"/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input name="saveEmployee" type="submit" value="Opret" class="green-btn "/></td>
+            </tr>
+        </table>
+    </form>
+</div>

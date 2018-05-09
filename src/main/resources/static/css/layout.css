@@ -389,3 +389,27 @@ ul {
     background-color: #eeeeee;
     border-radius: 5px;
 }
+
+.popup-formular {
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #000;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    z-index: 20;
+    display: none;
+    margin-left: -270px;
+    margin-top: -156px;
+}
+#overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 10;
+}

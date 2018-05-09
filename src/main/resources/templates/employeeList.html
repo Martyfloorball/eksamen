@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Medarbejder liste</title>
+    <title>RKI | Medarbejderliste</title>
 
     <!---CSS--->
     <link rel="stylesheet" href="css/layout.css" type="text/css"/>
@@ -28,6 +28,8 @@
 <body>
 
 <div th:replace="/includes/topMenu::topMenu"></div>
+<div th:replace="/createEmployee::createNewEmployee"></div>
+<div id="overlay"></div>
 
 
 <div class="container margin-top-65px">
@@ -37,7 +39,7 @@
                 <div class="container">
                     <div>
                         <div>
-                            <button type="submit" class="green-btn"
+                            <button type="button" class="green-btn"
                                     id="openCreateNewEmployee">Opret Medarbejder</button>
                         </div>
                     </div>

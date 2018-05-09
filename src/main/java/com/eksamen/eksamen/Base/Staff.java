@@ -21,6 +21,28 @@ public class Staff {
     this.staffNiveau = staffNiveau;
   }
 
+  public Staff(String firstName, String lastName, String password, int phonenumber, String email, int staffNiveau) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    this.phonenumber = phonenumber;
+    this.staffNiveau = staffNiveau;
+  }
+
+  @Override
+  public String toString() {
+    return "Staff{" +
+        "staffId=" + staffId +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", email='" + email + '\'' +
+        ", password='" + password + '\'' +
+        ", phonenumber=" + phonenumber +
+        ", staffNiveau=" + staffNiveau +
+        '}';
+  }
+
   public int getStaffId() {
     return staffId;
   }
