@@ -470,3 +470,12 @@ ul {
 #dashboard-week .day:not(:last-child) {
     margin-right: 1%;
 }
+
+.logo{
+    padding-top: 80px;
+}
+
+.userinfo{
+    padding-top: 100px;
+    padding-right: 80px;
+}
