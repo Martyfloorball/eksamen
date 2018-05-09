@@ -60,10 +60,10 @@ public class AjaxController {
     ArrayList<String> temp = new ArrayList<>();
     ArrayList<String> temp2 = new ArrayList<>();
     ResultSet userRS = DatabaseHandler.getInstance()
-        .querySelect("select firstname, lastname, email, phone, niveau_name\n" +
-            "from staff\n" +
-            "inner join staff_niveau n on staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
-            "where staff_id = 4;");
+      .querySelect("select firstname, lastname, email, phone, niveau_name\n" +
+        "from staff\n" +
+        "inner join staff_niveau n on staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
+        "where staff_id = " + Session.getId());
 
 
     try {
@@ -75,10 +75,10 @@ public class AjaxController {
       user.add(temp);
 
       ResultSet locationRS = DatabaseHandler.getInstance()
-          .querySelect("select location_name from location\n" +
-              "inner join staff_location l on location.location_id = l.fk_location_id\n" +
-              "inner  join staff s on l.fk_staff_id = s.staff_id\n" +
-              "where staff_id = 4;");
+        .querySelect("select location_name from location\n" +
+          "inner join staff_location l on location.location_id = l.fk_location_id\n" +
+          "inner  join staff s on l.fk_staff_id = s.staff_id\n" +
+          "where staff_id = " + Session.getId());
 
 
       while (locationRS.next())
