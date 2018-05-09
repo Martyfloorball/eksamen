@@ -14,17 +14,14 @@
         <script src="lib/jquery/jquery-3.3.1.min.js"></script>
         <script>
             $(document).ready(function () {
-                $("#profile,#settings").hide();
+                $("#profile-trigger,#settings-trigger").hide();
                 $("#submenu a").click(function (e) {
+                    console.log(e)
                     var href=$(this).attr("href");
-                    console.log(href)
+                    $(".panel").hide();
+                    $("#"+href+"-trigger").show();
                     //Sørger for at der ikke skiftes side
                     e.preventDefault();
-
-                    //Indsæt Ajax
-
-                    $("#shifts,#settings").hide();
-                    $("#shifts, #profile").hide();
                 });
             });
         </script>
