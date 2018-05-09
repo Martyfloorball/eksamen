@@ -14,10 +14,6 @@ public class HomeController {
         return "/index";
     }
 
-    @GetMapping("/medarbejderliste")
-    public String employeeList(Model model){
-        model.addAttribute("employee", new Staff());
-        return "employeeList";
-    }
+
 
 }
