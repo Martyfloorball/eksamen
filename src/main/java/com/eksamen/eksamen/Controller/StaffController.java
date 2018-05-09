@@ -21,7 +21,7 @@ public class StaffController {
   @GetMapping("/medarbejderliste")
   public String employeeList(Model model) throws SQLException {
     model.addAttribute("employee", new Staff());
-    model.addAttribute("location", new Location());
+    model.addAttribute("loca", new Location());
 
     ResultSet resultSet = DatabaseHandler.getInstance().selectAll("location");
 
@@ -29,6 +29,7 @@ public class StaffController {
       locations.add(new Location(resultSet.getInt("location_id"), resultSet.getString("location_name")));
     }
 
+    resultSet.close();
     System.out.println(locations);
     model.addAttribute("locations", locations);
 
@@ -36,7 +37,8 @@ public class StaffController {
   }
 
   @PostMapping("/medarbejderliste")
-  public String addEmployee(@ModelAttribute Staff staff) {
+  public String addEmployee(@ModelAttribute Staff staff, @ModelAttribute Location location) {
+    System.out.println(location.getLocationId()+" "+location.getLocationName());
     try {
       String[] columns = {"firstname", "lastname", "password", "phone", "email", "fk_staff_niveau_id"};
       ArrayList staffArrayList = new ArrayList<>();
