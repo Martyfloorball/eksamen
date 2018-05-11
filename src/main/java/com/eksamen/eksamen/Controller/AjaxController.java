@@ -4,6 +4,7 @@ import com.eksamen.eksamen.Handler.DatabaseHandler;
 import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.ResultSet;
@@ -13,14 +14,26 @@ import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @RestController
 public class AjaxController {
 
-  @PostMapping("/getEmployees")
+  @PostMapping(value = "/getEmployees")
   public ArrayList getEmployeeList() {
     ArrayList<ArrayList<String>> staffs = new ArrayList<>();
     ArrayList<String> columnLabels = new ArrayList<>();
+
+    String filter = "";
+    /*if(array.length == 1){
+      filter += "WHERE location_id = "; // + array[0] + " ";
+    }else if(array.length > 1){
+      filter += "WHERE location_id = "; // + array[0]
+
+      /*for (int i = 1; i < arr.length; i++ ){ //skal skippe første plads i array
+        filter += " OR location_id = "; //+ array[i] + " ";
+      }
+    }*/
 
     try {
       ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT\n" +
@@ -32,7 +45,7 @@ public class AjaxController {
           "FROM staff\n" +
           "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id\n" +
           "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
-          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id;");
+          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id;"); //"+ filter+"
 
       for (int i = 1; i < rs.getMetaData().getColumnCount() +1; i++) {
         columnLabels.add(rs.getMetaData().getColumnLabel(i));

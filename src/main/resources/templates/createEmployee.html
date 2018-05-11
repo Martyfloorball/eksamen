@@ -47,15 +47,18 @@
                     </select>
                 </td>
             </tr>
-            <tr><td><label>Anlæg:</label></td></tr>
-            <th:block th:each="location : ${locations}">
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="checkbox" th:text="${location.locationName}" th:value="${location.locationId}"/>
-                    </td>
-                </tr>
-            </th:block>
+            <tr>
+                <td><label>Anlæg:</label></td>
+            </tr>
+
+                <th:block th:each="location : ${locations}">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" name="checkboxes" th:text="${location.locationName}" th:value="${location.locationId}" />
+                        </td>
+                    </tr>
+                </th:block>
             <tr>
                 <td><label for="employeePassword">Adgangskode:</label></td>
                 <td>
