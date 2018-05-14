@@ -28,12 +28,18 @@ public class AjaxController {
         }
       }
     }
+    String isAdmin = "";
+    System.out.println(Session.getUserniveau());
+    if (Session.getUserniveau() == 15){
+      isAdmin += "phone AS Telefonnummer, " +
+                 "email AS Email, ";
+    }
+
 
     try {
       ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT " +
         "CONCAT(firstname, ' ', lastname) AS Navn, " +
-        "phone AS Telefonnummer, " +
-        "email AS Email, " +
+        isAdmin +
         "location_name AS Anlæg, " +
         "niveau_name AS Stilling " +
         "FROM staff " +
