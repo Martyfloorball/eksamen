@@ -25,12 +25,12 @@ public class AjaxController {
     ArrayList<String> columnLabels = new ArrayList<>();
 
     String filter = "";
-    if(filterLocations.length >= 1){
-      filter += "WHERE location_id = '"+filterLocations[0]+"'";
+    if (filterLocations.length >= 1) {
+      filter += "WHERE location_id = '" + filterLocations[0] + "'";
 
-      if(filterLocations.length > 1) {
+      if (filterLocations.length > 1) {
         for (int i = 1; i < filterLocations.length; i++) { //skal skippe første plads i array
-          filter += " OR location_id = '"+filterLocations[i]+"'";
+          filter += " OR location_id = '" + filterLocations[i] + "'";
         }
       }
     }
@@ -39,19 +39,19 @@ public class AjaxController {
 
     try {
       ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT " +
-          "CONCAT(firstname, ' ', lastname) AS Navn, " +
-          "phone AS Telefonnummer, " +
-          "email AS Email, " +
-          "location_name AS Anlæg, " +
-          "niveau_name AS Stilling " +
-          "FROM staff " +
-          "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id " +
-          "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id " +
-          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id "
-          +filter
+        "CONCAT(firstname, ' ', lastname) AS Navn, " +
+        "phone AS Telefonnummer, " +
+        "email AS Email, " +
+        "location_name AS Anlæg, " +
+        "niveau_name AS Stilling " +
+        "FROM staff " +
+        "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id " +
+        "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id " +
+        "INNER JOIN location l2 ON l.fk_location_id = l2.location_id "
+        + filter
       );
 
-      for (int i = 1; i < rs.getMetaData().getColumnCount() +1; i++) {
+      for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
         columnLabels.add(rs.getMetaData().getColumnLabel(i));
       }
       staffs.add(columnLabels);
@@ -64,7 +64,7 @@ public class AjaxController {
         }
         staffs.add(staff);
       }
-
+      rs.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -99,11 +99,10 @@ public class AjaxController {
           "inner  join staff s on l.fk_staff_id = s.staff_id\n" +
           "where staff_id = " + userID);
 
-
       while (locationRS.next())
         temp2.add(locationRS.getString(1));
       user.add(temp2);
-
+      locationRS.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
