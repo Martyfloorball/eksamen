@@ -1,20 +1,13 @@
 package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Handler.DatabaseHandler;
-import com.eksamen.eksamen.Base.Session;
-import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
-
-import javax.xml.transform.Result;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @RestController
 public class AjaxController {
@@ -34,8 +27,6 @@ public class AjaxController {
         }
       }
     }
-
-    System.out.println();
 
     try {
       ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT " +
@@ -106,7 +97,6 @@ public class AjaxController {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    System.out.println(user);
     return user;
   }
 }
