@@ -52,9 +52,10 @@
                             <form method="post" th:action="@{/medarbejderliste}">
                                 <h2>Filtrér Anlæg:</h2>
                                 <th:block th:each="location : ${locations}">
-                                    <input type="checkbox" name="checkboxesLocation" th:text="${location.locationName}" th:value="${location.locationId}" th:checked="checked"/> <br/>
+                                    <label th:for="'filtercheckbox' + ${location.locationId}" th:text="${location.locationName}"></label>
+                                    <input th:id="'filtercheckbox' + ${location.locationId}" type="checkbox" name="checkboxesLocation"  th:value="${location.locationId}" th:checked="checked"/>  <br/>
                                 </th:block>
-                                <input name="filterLocations" type="submit" value="Filtrér lokationer" class="green-btn "/>
+                                <input name="filterLocations" type="button" value="Filtrér lokationer" class="green-btn "/>
                             </form>
                         </div>
                     </div>

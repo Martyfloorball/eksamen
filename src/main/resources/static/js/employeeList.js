@@ -1,4 +1,5 @@
-$(document).ready(function () {
+$(document).ready(function (){
+    getList();
 
     $("#openCreateNewEmployee").click(function () {
         $("#overlay, #createNewEmployee").show();
@@ -8,25 +9,40 @@ $(document).ready(function () {
         $("#overlay, .popup-formular").hide();
     });
 
-  $.ajax({
-    type: "POST",
-    url: "/getEmployees",
-    success: function (data) {
+    $("input[name=filterLocations]").click(function () {
+        getList();
+    });
 
-
-      $.each(data[0], function (key, value) {
-        $('#table').append('<th>' + value + '</th>')
-      });
-
-      for (var i = 1; i < data.length; i++) {
-        var string = '<tr>';
-        $.each(data[i], function (key, value) {
-          string += '<td>' + value + '</td>'
-        });
-        string += '</tr>';
-        $('#table').append(string)
-      }
-      console.log(data);
-    }
-  })
 });
+
+function getList() {
+    var filterLocations = [];
+    $('input[type=checkbox]').each(function () {
+        if($(this).prop("checked") == true){
+            filterLocations.push($(this).val());
+        }
+    });
+    //console.log(filterLocations);
+    $.ajax({
+        type: "POST",
+        data: {checkboxesLocation: filterLocations},
+        url: "/getEmployees",
+        success: function (data) {
+            $('#table').empty();
+
+            $.each(data[0], function (key, value) {
+                $('#table').append('<th>' + value + '</th>')
+            });
+
+            for (var i = 1; i < data.length; i++) {
+                var string = '<tr>';
+                $.each(data[i], function (key, value) {
+                    string += '<td>' + value + '</td>'
+                });
+                string += '</tr>';
+                $('#table').append(string)
+            }
+           // console.log(data);
+        }
+    });
+}

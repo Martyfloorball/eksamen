@@ -20,32 +20,36 @@ import java.util.Arrays;
 public class AjaxController {
 
   @PostMapping(value = "/getEmployees")
-  public ArrayList getEmployeeList() {
+  public ArrayList getEmployeeList(@RequestParam("checkboxesLocation[]") int[] filterLocations) {
     ArrayList<ArrayList<String>> staffs = new ArrayList<>();
     ArrayList<String> columnLabels = new ArrayList<>();
 
     String filter = "";
-    /*if(array.length == 1){
-      filter += "WHERE location_id = "; // + array[0] + " ";
-    }else if(array.length > 1){
-      filter += "WHERE location_id = "; // + array[0]
+    if(filterLocations.length >= 1){
+      filter += "WHERE location_id = '"+filterLocations[0]+"'";
 
-      /*for (int i = 1; i < arr.length; i++ ){ //skal skippe første plads i array
-        filter += " OR location_id = "; //+ array[i] + " ";
+      if(filterLocations.length > 1) {
+        for (int i = 1; i < filterLocations.length; i++) { //skal skippe første plads i array
+          filter += " OR location_id = '"+filterLocations[i]+"'";
+        }
       }
-    }*/
+    }
+
+    System.out.println();
 
     try {
-      ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT\n" +
-          "CONCAT(firstname, ' ', lastname) AS Navn,\n" +
-          "phone AS Telefonnummer,\n" +
-          "email AS Email,\n" +
-          "location_name AS Anlæg,\n" +
-          "niveau_name AS Stilling\n" +
-          "FROM staff\n" +
-          "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id\n" +
-          "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
-          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id;"); //"+ filter+"
+      ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT " +
+          "CONCAT(firstname, ' ', lastname) AS Navn, " +
+          "phone AS Telefonnummer, " +
+          "email AS Email, " +
+          "location_name AS Anlæg, " +
+          "niveau_name AS Stilling " +
+          "FROM staff " +
+          "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id " +
+          "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id " +
+          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id "
+          +filter
+      );
 
       for (int i = 1; i < rs.getMetaData().getColumnCount() +1; i++) {
         columnLabels.add(rs.getMetaData().getColumnLabel(i));
