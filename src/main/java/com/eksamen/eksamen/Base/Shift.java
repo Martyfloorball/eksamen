@@ -17,9 +17,9 @@ public class Shift {
         this.comment = comment;
         this.approved = approved;
         this.start_date = start_date;
-        this.start_time = start_time;
+        this.start_time = start_time.substring(0,5);
         this.end_date = end_date;
-        this.end_time = end_time;
+        this.end_time = end_time.substring(0,5);
         this.location = location;
         this.staffId = staffId;
         this.staffName = staffName;

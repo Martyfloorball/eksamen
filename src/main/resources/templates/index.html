@@ -18,24 +18,112 @@
         <div id="dashboard-week">
             <div class="day">
                 <h2 th:text="${weekNames[0]}+' '+${days[0]}+'. '+${months[0]}"></h2>
+                <div class="shift" th:each="shift: ${myShifts[0]}" th:if="${myShifts[0].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div class="shift" th:each="shift: ${myShifts[0]}" th:if="${myShifts[0].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div th:if="${myShifts[0].size()} == 0">
+                    <p class="none">Ingen vagter.</p>
+                </div>
+                <hr>
+                <div class="free-shift" th:each="shift: ${freeShifts[0]}">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
             </div>
             <div class="day">
                 <h2 th:text="${weekNames[1]}+' '+${days[1]}+'. '+${months[1]}"></h2>
+                <div class="shift" th:each="shift: ${myShifts[1]}" th:if="${myShifts[1].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div th:if="${myShifts[1].size()} == 0">
+                    <p class="none">Ingen vagter.</p>
+                </div>
+                <hr>
+                <div class="free-shift" th:each="shift: ${freeShifts[1]}">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
             </div>
             <div class="day">
                 <h2 th:text="${weekNames[2]}+' '+${days[2]}+'. '+${months[2]}"></h2>
+                <div class="shift" th:each="shift: ${myShifts[2]}" th:if="${myShifts[2].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div th:if="${myShifts[2].size()} == 0">
+                    <p class="none"> Ingen vagter.</p>
+                </div>
+                <hr>
+                <div class="free-shift" th:each="shift: ${freeShifts[2]}">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
             </div>
             <div class="day">
                 <h2 th:text="${weekNames[3]}+' '+${days[3]}+'. '+${months[3]}"></h2>
+                <div class="shift" th:each="shift: ${myShifts[3]}" th:if="${myShifts[3].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div th:if="${myShifts[3].size()} == 0">
+                    <p class="none"> Ingen vagter.</p>
+                </div>
+                <hr>
+                <div class="free-shift" th:each="shift: ${freeShifts[3]}">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
             </div>
             <div class="day">
                 <h2 th:text="${weekNames[4]}+' '+${days[4]}+'. '+${months[4]}"></h2>
+                <div class="shift" th:each="shift: ${myShifts[4]}" th:if="${myShifts[4].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div th:if="${myShifts[4].size()} == 0">
+                    <p class="none"> Ingen vagter.</p>
+                </div>
+                <hr>
+                <div class="free-shift" th:each="shift: ${freeShifts[4]}">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
             </div>
             <div class="day">
                 <h2 th:text="${weekNames[5]}+' '+${days[5]}+'. '+${months[5]}"></h2>
+                <div class="shift" th:each="shift: ${myShifts[5]}" th:if="${myShifts[5].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div th:if="${myShifts[5].size()} == 0">
+                    <p class="none"> Ingen vagter.</p>
+                </div>
+                <hr>
+                <div class="free-shift" th:each="shift: ${freeShifts[5]}">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
             </div>
             <div class="day">
                 <h2 th:text="${weekNames[6]}+' '+${days[6]}+'. '+${months[6]}"></h2>
+                <div class="shift" th:each="shift: ${myShifts[6]}" th:if="${myShifts[6].size()} > 0">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
+                <div th:if="${myShifts[6].size()} == 0">
+                    <p class="none"> Ingen vagter.</p>
+                </div>
+                <hr>
+                <div class="free-shift" th:each="shift: ${freeShifts[6]}">
+                    <p class="time" th:text="${shift.start_time}+' - '+${shift.end_time}"></p>
+                    <p class="location" th:text="${shift.location}"></p>
+                </div>
             </div>
         </div>
     </body>
