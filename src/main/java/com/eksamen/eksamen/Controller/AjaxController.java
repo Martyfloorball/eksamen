@@ -70,17 +70,19 @@ public class AjaxController {
     }
     return staffs;
   }
+
   @PostMapping("/getProfile")
   public ArrayList<ArrayList<String>> getUser() {
 
     ArrayList<ArrayList<String>> user = new ArrayList<>();
     ArrayList<String> temp = new ArrayList<>();
     ArrayList<String> temp2 = new ArrayList<>();
+    int userID = 4;
     ResultSet userRS = DatabaseHandler.getInstance()
       .querySelect("select firstname, lastname, email, phone, niveau_name\n" +
         "from staff\n" +
         "inner join staff_niveau n on staff.fk_staff_niveau_id = n.staff_niveau_id\n" +
-        "where staff_id = " + Session.getId());
+        "where staff_id = " + userID);
 
 
     try {
@@ -95,7 +97,7 @@ public class AjaxController {
         .querySelect("select location_name from location\n" +
           "inner join staff_location l on location.location_id = l.fk_location_id\n" +
           "inner  join staff s on l.fk_staff_id = s.staff_id\n" +
-          "where staff_id = " + Session.getId());
+          "where staff_id = " + userID);
 
 
       while (locationRS.next())
@@ -105,6 +107,7 @@ public class AjaxController {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    System.out.println(user);
     return user;
   }
 }
