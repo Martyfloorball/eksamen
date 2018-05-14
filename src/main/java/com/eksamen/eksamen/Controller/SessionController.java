@@ -102,6 +102,12 @@ public class SessionController {
       }
 
 
+
       return "redirect:/forgot-password";
+    }
+    @GetMapping("/logout")
+  public String logout(){
+      Session.setId(0);
+      return "redirect:/login";
     }
 }
