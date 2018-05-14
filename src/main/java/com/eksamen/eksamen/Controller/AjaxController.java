@@ -1,5 +1,6 @@
 package com.eksamen.eksamen.Controller;
 
+import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,7 +69,7 @@ public class AjaxController {
     ArrayList<ArrayList<String>> user = new ArrayList<>();
     ArrayList<String> temp = new ArrayList<>();
     ArrayList<String> temp2 = new ArrayList<>();
-    int userID = 4;
+    int userID = Session.getId();
     ResultSet userRS = DatabaseHandler.getInstance()
       .querySelect("select firstname, lastname, email, phone, niveau_name\n" +
         "from staff\n" +
