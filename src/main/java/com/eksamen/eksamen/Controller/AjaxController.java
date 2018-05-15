@@ -106,4 +106,25 @@ public class AjaxController {
     }
     return user;
   }
+  @PostMapping("/getUserName")
+  public ArrayList<String> getUserName() {
+
+    ArrayList<String> userName = new ArrayList<>();
+    int userID = Session.getId();
+    ResultSet userNameRS = DatabaseHandler.getInstance()
+            .querySelect("select firstname, lastname\n" +
+                    "from staff\n" +
+                    "where staff_id = " + userID);
+    try {
+      userNameRS.next();
+      for (int i = 1; i < userNameRS.getMetaData().getColumnCount() + 1; i++) {
+        userName.add(userNameRS.getString(i));
+      }
+      //userNameRS.close();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return userName;
+  }
 }

@@ -1,19 +1,132 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Vagtplan</title>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="lib/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
 
-    <!---CSS--->
-    <link rel="stylesheet" href="css/layout.css" type="text/css"/>
-    <link rel="stylesheet" href="lib/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
+        <title>RKI | Vagtplan</title>
 
-    <!---JQUERY--->
-    <script src="lib/jquery/jquery-3.3.1.min.js"></script>
-</head>
-<body>
-<div th:replace="/includes/topMenu::topMenu"></div>
+        <!---CSS--->
+        <link rel="stylesheet" href="css/layout.css" type="text/css"/>
 
+        <!---JQUERY--->
+        <script src="lib/jquery/jquery-3.3.1.min.js"></script>
 
-</body>
+        <style>
+            #plan-menu {
+
+                padding: 15px;
+            }
+
+            #date-chooser {
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                border: 2px solid #ccc;
+                float: left;
+                color: #666;
+                margin-right: 20px;
+                background: #fff;
+            }
+
+            #left-btn, #right-btn {
+                padding: 7.5px 15px;
+            }
+
+            #left-btn:hover, #right-btn:hover {
+                background: #666;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            #date-chosen {
+                padding: 8px 10px;
+                font-size: 15px;
+                color: #007bff;
+                border-right: 2px solid #ccc;
+                border-left: 2px solid #ccc;
+                text-transform: uppercase;
+            }
+
+            #left-btn, #right-btn, #date-chosen {
+                float: left;
+                font-weight: bold;
+            }
+
+            #today {
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                border: 2px solid #ccc;
+                display: inline-block;
+                color: #666;
+                marigin-right: 20px;
+                padding: 8px 10px;
+                font-size: 15px;
+                text-transform: uppercase;
+                float: left;
+                font-weight: bold;
+            }
+
+            #month-viewer {
+                width: 100%;
+                border-top: 1px solid #ccc;
+            }
+
+            #month-viewer #weeknames {
+
+            }
+
+            #month-viewer #weeknames .weekname {
+                color: #333;
+                width: calc(100% / 7);
+                padding: 15px 0;
+                font-size: 20px;
+                text-align: center;
+                float: left;
+                font-weight: bold;
+                background-color: #fff;
+            }
+
+            #month-viewer #weeknames .weekname:not(:last-child) {
+                
+            }
+
+            .clear {
+                clear: both;
+            }
+        </style>
+    </head>
+    <body>
+        <div th:replace="includes/topMenu::topMenu"></div>
+        <div id="planner">
+            <div id="plan-menu">
+
+                <div id="date-chooser">
+                    <div id="left-btn"><i class="fa fa-caret-left"></i></div>
+                    <div id="date-chosen">Maj 2018</div>
+                    <div id="right-btn"><i class="fa fa-caret-right"></i></div>
+                </div>
+                <div id="today">I dag</div>
+                <div class="clear"></div>
+            </div>
+            <div id="month-viewer">
+                <div id="weeknames">
+                    <div class="weekname">Mandag</div>
+                    <div class="weekname">Tirsdag</div>
+                    <div class="weekname">Onsdag</div>
+                    <div class="weekname">Torsdag</div>
+                    <div class="weekname">Fredag</div>
+                    <div class="weekname">Lørdag</div>
+                    <div class="weekname">Søndag</div>
+                </div>
+                <div id="days">
+                    <div class="day">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
