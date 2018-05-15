@@ -9,7 +9,7 @@ $(document).ready(function () {
       $("#telefon").val(data[0][3]);
       $("#stilling").val(data[0][4]);
       $.each(data[1], function (key, value) {
-        $('#lokation').append('<input class="col-12" type="text" disabled value="'+ value +'"></input>')
+        $('#lokation').append('<input class="col-12 location" type="text" disabled value="'+ value +'"></input>')
       });
     }
   });

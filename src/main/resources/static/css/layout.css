@@ -513,3 +513,9 @@ ul {
 .free-shift .location{
     font-size: 15px;
 }
+
+.location, .role{
+    border: none !important;
+    background-color: #999999;
+    color: white;
+}
