@@ -1,6 +1,7 @@
 package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Base.Location;
+import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Base.Staff;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,21 +20,21 @@ import java.util.Arrays;
 
 @Controller
 public class StaffController {
-  ArrayList locations = new ArrayList();
 
   @GetMapping("/medarbejderliste")
   public String employeeList(Model model) throws SQLException {
+    ArrayList<Location> locations = new ArrayList();
+
     model.addAttribute("employee", new Staff());
     model.addAttribute("locations", locations);
 
-    ResultSet resultSet = DatabaseHandler.getInstance().selectAll("location");
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select location_id, location_name\n" +
+      "from location inner join staff_location l on location.location_id = l.fk_location_id\n" +
+      "inner join staff s on l.fk_staff_id = s.staff_id\n" +
+      "where staff_id = " + Session.getId());
 
-    if (locations.size() == 0) { // for at der ikke kommer duplicates i checkboxes i oprettelse af medarbejder.
-      while (resultSet.next()) {
-        //der skal tilføjes en if/else der kun skal finde de anlæg centerlederen / admin er en del af.
-
-        locations.add(new Location(resultSet.getInt("location_id"), resultSet.getString("location_name")));
-      }
+    while (resultSet.next()) {
+      locations.add(new Location(resultSet.getInt("location_id"), resultSet.getString("location_name")));
     }
 
     resultSet.close();
@@ -60,7 +61,14 @@ public class StaffController {
       DatabaseHandler.getInstance().insert("staff", columns, staffArrayList);
 
       //To get the highest staff id which is the newly created staff employee
-      ResultSet highestStaffId = DatabaseHandler.getInstance().select("staff", "MAX(staff_id)", "", "",0,"", "");
+      ResultSet highestStaffId = DatabaseHandler.getInstance().select(
+        "staff",
+        "MAX(staff_id)",
+        "",
+        "",
+        0,
+        "",
+        "");
       highestStaffId.next();
 
       //Saving the locations to the new staff employee to the database
@@ -77,19 +85,4 @@ public class StaffController {
     }
     return "redirect:/medarbejderliste";
   }
-
-  /*
-  Method to filter the stafflist
-   */
-  @PostMapping(value = "/medarbejderliste", params = "filterLocations=Filtrér lokationer")
-  public String filterStaffLocation(@RequestParam("checkboxesLocation") int[] filterLocationId){
-
-
-
-    System.out.println(Arrays.toString(filterLocationId));
-
-
-    return "redirect:/medarbejderliste";
-  }
-
 }
