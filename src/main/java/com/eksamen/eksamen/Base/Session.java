@@ -2,7 +2,7 @@ package com.eksamen.eksamen.Base;
 
 public class Session {
     private static int id = 4;
-    private static int userniveau;
+    private static int userniveau = 15;
 
     //Hvis id ikke er 0 returneres true, og brugeren bliver logget ind
     public static boolean isLoggedIn(){
