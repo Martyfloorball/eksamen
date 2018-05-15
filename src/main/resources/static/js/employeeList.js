@@ -41,7 +41,7 @@ function getList() {
                 $.each(data[i], function (key, value) {
                     string += '<td>' + value + '</td>'
                 });
-                string += "<td><a href='/?email="+data[i][2]+"'><i class='fas fa-edit'></i></a></td>";
+                string += "<td><a href='/medarbejder?email="+data[i][2]+"'><i class='fas fa-edit'></i></a></td>";
                 string += '</tr>';
                 $('#table').append(string)
             }

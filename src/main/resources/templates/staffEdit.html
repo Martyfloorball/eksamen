@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="lib/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
+
+    <title>RKI | Log ind</title>
+
+    <!---CSS--->
+    <link rel="stylesheet" href="css/layout.css" type="text/css"/>
+
+    <!---JQUERY--->
+    <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div th:replace="includes/topMenu::topMenu"></div>
+<form method="post" th:action="@{/medarbejder}">
+    <div class="row">
+        <div class="col-6 logo">
+            <img src="https://placehold.it/300x300" class="center img-circle-300"/>
+        </div>
+        <div class="col-6 userinfo">
+            <div class="row">
+                <div class="col-6">
+                    <label for="fornavn">Fornavn</label>
+                    <input type="text" id="fornavn" th:value="${employee.firstName}" required="true">
+                </div>
+                <div class="col-6">
+                    <label for="efternavn">Efternavn</label>
+                    <input type="text" id="efternavn" th:value="${employee.lastName}" required="true">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label for="email">E-mail</label>
+                    <input type="text" id="email" th:value="${employee.email}" required="true">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label for="telefon">Telefon</label>
+                    <input type="text" id="telefon" th:value="${employee.phonenumber}" required="true">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <label for="setLocation">Lokationer</label>
+                </div>
+                <div class="col-6">
+                    <div id="setLocation">
+                        <th:block th:each="location : ${locations}">
+                            <input type="checkbox" name="checkboxes" th:text="${location.locationName}"
+                                   th:value="${location.locationId}" /> <br/>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <label for="stilling">Stilling</label>
+                </div>
+                <div class="col-6">
+                    <select id="stilling" class="pull-right"
+                            th:value="${employee.staffNiveau}" required="true">
+                        <option  th:selected="${employee.staffNiveau == 17}" value="17">Medarbejder</option>
+                        <option  th:selected="${employee.staffNiveau == 16}" value="16">Centerleder</option>
+                        <option  th:selected="${employee.staffNiveau == 15}" value="15">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

@@ -7,10 +7,7 @@ import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.ResultSet;
@@ -22,22 +19,9 @@ import java.util.Arrays;
 public class StaffController {
 
   @GetMapping("/medarbejderliste")
-  public String employeeList(Model model) throws SQLException {
-    ArrayList<Location> locations = new ArrayList();
-
+  public String employeeList(Model model) {
     model.addAttribute("employee", new Staff());
-    model.addAttribute("locations", locations);
-
-    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select location_id, location_name\n" +
-      "from location inner join staff_location l on location.location_id = l.fk_location_id\n" +
-      "inner join staff s on l.fk_staff_id = s.staff_id\n" +
-      "where staff_id = " + Session.getId());
-
-    while (resultSet.next()) {
-      locations.add(new Location(resultSet.getInt("location_id"), resultSet.getString("location_name")));
-    }
-
-    resultSet.close();
+    model.addAttribute("locations", getLocations());
 
     return "employeeList";
   }
@@ -62,13 +46,13 @@ public class StaffController {
 
       //To get the highest staff id which is the newly created staff employee
       ResultSet highestStaffId = DatabaseHandler.getInstance().select(
-        "staff",
-        "MAX(staff_id)",
-        "",
-        "",
-        0,
-        "",
-        "");
+          "staff",
+          "MAX(staff_id)",
+          "",
+          "",
+          0,
+          "",
+          "");
       highestStaffId.next();
 
       //Saving the locations to the new staff employee to the database
@@ -84,5 +68,70 @@ public class StaffController {
       e.printStackTrace();
     }
     return "redirect:/medarbejderliste";
+  }
+
+  @GetMapping("/medarbejder")
+  public String editStaff(Model model, @RequestParam String email) {
+    model.addAttribute("locations", getLocations());
+    model.addAttribute("employee", getStaff(email));
+    return "staffEdit";
+  }
+
+  @PostMapping("/medarbejder")
+  public String editStaffOrDelete() {
+    return "redirect:/medarbejderliste";
+  }
+
+  public Staff getStaff(String email){
+
+    Staff staffEdit = new Staff();
+
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
+        "SELECT firstname, lastname, phone, email, fk_staff_niveau_id " +
+            "FROM " +
+            "staff " +
+            "WHERE " +
+            "email = '"+ email +"'"
+    );
+
+    try {
+      resultSet.next();
+
+      staffEdit.setFirstName(resultSet.getString("firstname"));
+      staffEdit.setLastName(resultSet.getString("lastname"));
+      staffEdit.setPhonenumber(resultSet.getInt("phone"));
+      staffEdit.setEmail(resultSet.getString("email"));
+      staffEdit.setStaffNiveau(resultSet.getInt("fk_staff_niveau_id"));
+
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    System.out.println(staffEdit);
+
+    return staffEdit;
+  }
+
+  /*
+  Method to get all the locations in the database into an array
+  */
+  public ArrayList<Location> getLocations() {
+    ArrayList<Location> locations = new ArrayList();
+
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select location_id, location_name\n" +
+        "from location inner join staff_location l on location.location_id = l.fk_location_id\n" +
+        "inner join staff s on l.fk_staff_id = s.staff_id\n" +
+        "where staff_id = " + Session.getId());
+
+    try {
+      while (resultSet.next()) {
+        locations.add(new Location(resultSet.getInt("location_id"), resultSet.getString("location_name")));
+      }
+      resultSet.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return locations;
   }
 }
