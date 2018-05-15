@@ -1,4 +1,4 @@
-<div id="menu" th:fragment="topMenu" xmlns:th="http://www.w3.org/1999/xhtml">
+<div id="menu" th:fragment="topMenu" xmlns:th="http://www.thymeleaf.org">
     <script src="js/dropdownTopMenu.js"></script>
     <script src="js/topMenu.js"></script>
     <ul>
@@ -12,7 +12,7 @@
                 <i class="fa fa-calendar-alt"></i>Vagtplan
             </a>
         </li>
-        <li>
+        <li th:if="${niveau} == 15">
             <a href="medarbejderliste">
                 <i class="fa fa-users"></i>Medarbejdere
             </a>

@@ -29,7 +29,6 @@ public class AjaxController {
       }
     }
     String isAdmin = "";
-    System.out.println(Session.getUserniveau());
     if (Session.getUserniveau() == 15){
       isAdmin += "phone AS Telefonnummer, " +
                  "email AS Email, ";

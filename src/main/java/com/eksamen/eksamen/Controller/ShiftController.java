@@ -1,5 +1,6 @@
 package com.eksamen.eksamen.Controller;
 
+import com.eksamen.eksamen.Base.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ public class ShiftController {
   public String vagtplan(Model model){
     System.out.println(Arrays.toString(getDates(calendar)));
     System.out.println(Arrays.toString(getDisabled(calendar)));
+    model.addAttribute("niveau", Session.getUserniveau());
     return "schedule";
   }
 

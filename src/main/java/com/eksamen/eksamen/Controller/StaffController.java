@@ -22,7 +22,7 @@ public class StaffController {
   public String employeeList(Model model) {
     model.addAttribute("employee", new Staff());
     model.addAttribute("locations", getLocations());
-
+    model.addAttribute("niveau", Session.getUserniveau());
     return "employeeList";
   }
 
