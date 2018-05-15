@@ -33,16 +33,20 @@ function getList() {
             $.each(data[0], function (key, value) {
                 $('#table').append('<th>' + value + '</th>')
             });
+          $('#table').append('<th>' + 'value' + '</th>');
 
-            for (var i = 1; i < data.length; i++) {
+
+          for (var i = 1; i < data.length; i++) {
                 var string = '<tr>';
                 $.each(data[i], function (key, value) {
                     string += '<td>' + value + '</td>'
                 });
+                string += "<td><a href='/?email="+data[i][2]+"'><i class='fas fa-edit'></i></a></td>";
                 string += '</tr>';
                 $('#table').append(string)
             }
-           // console.log(data);
+
+          // console.log(data);
         }
     });
 }
