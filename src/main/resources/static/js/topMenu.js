@@ -10,3 +10,11 @@ $(document).ready(function () {
     $("#menu ul li:nth-child(3) a").addClass("active");
   }
 });
+
+$.ajax({
+    type: "POST",
+    url: "/getUserName",
+    success: function (data) {
+        $("#dropdownName").prepend(data[0] + " " + data[1] + " ");
+    }
+});
