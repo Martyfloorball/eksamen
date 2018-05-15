@@ -247,6 +247,19 @@ ul {
     font-family: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size: 1rem;
 }
+.btn-green {
+    color: white;
+    background: #4FD33B;
+    border: 1px solid #4FD33B;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: medium;
+}
+
+.createNewEmployee,
+.filter{
+    width: 100%;
+}
 
 .btn:not(:disabled) {
     cursor: pointer;

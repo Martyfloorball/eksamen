@@ -12,19 +12,6 @@
     <script src="lib/jquery/jquery-3.3.1.min.js"></script>
     <script src="js/employeeList.js"></script>
 </head>
-
-<style>
-    .green-btn {
-        color: white;
-        background: #4FD33B;
-        border: 1px solid #4FD33B;
-        width: 100%;
-        padding: 15px;
-        border-radius: 5px;
-        font-size: medium;
-    }
-</style>
-
 <body>
 
 <div th:replace="/includes/topMenu::topMenu"></div>
@@ -39,7 +26,7 @@
                 <div class="container">
                     <div>
                         <div>
-                            <button type="button" class="green-btn"  th:if="${niveau} == 15"
+                            <button type="button" class="btn-green createNewEmployee"  th:if="${niveau} == 15"
                                     id="openCreateNewEmployee">Opret Medarbejder</button>
                         </div>
                     </div>
@@ -55,7 +42,7 @@
                                     <label th:for="'filtercheckbox' + ${location.locationId}" th:text="${location.locationName}"></label>
                                     <input th:id="'filtercheckbox' + ${location.locationId}" type="checkbox" name="checkboxesLocation"  th:value="${location.locationId}" th:checked="checked"/>  <br/>
                                 </th:block>
-                                <input name="filterLocations" type="button" value="Filtrér lokationer" class="green-btn "/>
+                                <input name="filterLocations" type="button" value="Filtrér lokationer" class="btn-green filter"/>
                             </form>
                         </div>
                     </div>
