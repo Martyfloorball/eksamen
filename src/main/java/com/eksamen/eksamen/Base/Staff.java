@@ -7,7 +7,7 @@ public class Staff {
   private String email;
   private String password; //skal nok fjernes
   private int phonenumber;
-  private int staffNiveau = 0;
+  private int staffNiveau = 0; //bliver ikke brugt
 
   public Staff() { }
 

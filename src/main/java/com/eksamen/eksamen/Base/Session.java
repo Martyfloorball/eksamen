@@ -9,6 +9,12 @@ public class Session {
         return id != 0;
     }
 
+    public static boolean isAdmin(){ return userniveau == 15; }
+
+    public static boolean isLeader() { return userniveau == 16; }
+
+    public static boolean isWorker(){ return userniveau == 17; }
+
     public static int getId() {
         return id;
     }

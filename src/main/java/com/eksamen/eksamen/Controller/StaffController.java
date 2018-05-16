@@ -21,7 +21,10 @@ public class StaffController {
   public String employeeList(Model model) {
     model.addAttribute("employee", new Staff());
     model.addAttribute("locations", getLocations());
-    model.addAttribute("niveau", Session.getUserniveau());
+    model.addAttribute("isAdmin", Session.isAdmin());
+    model.addAttribute("isWorker", Session.isWorker());
+    model.addAttribute("isLeader", Session.isLeader());
+
     return "employeeList";
   }
 

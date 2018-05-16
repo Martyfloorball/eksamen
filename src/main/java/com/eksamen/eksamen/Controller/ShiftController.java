@@ -17,7 +17,10 @@ public class ShiftController {
   public String vagtplan(Model model){
     System.out.println(Arrays.toString(getDates(calendar)));
     System.out.println(Arrays.toString(getDisabled(calendar)));
-    model.addAttribute("niveau", Session.getUserniveau());
+    model.addAttribute("isAdmin", Session.isAdmin());
+    model.addAttribute("isWorker", Session.isWorker());
+    model.addAttribute("isLeader", Session.isLeader());
+
     return "schedule";
   }
 

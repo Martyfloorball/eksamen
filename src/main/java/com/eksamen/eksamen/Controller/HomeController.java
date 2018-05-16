@@ -21,7 +21,9 @@ public class HomeController {
         model.addAttribute("months", getMonths());
         model.addAttribute("myShifts", getMyShifts());
         model.addAttribute("freeShifts", getFreeShifts());
-        model.addAttribute("niveau", Session.getUserniveau());
+        model.addAttribute("isAdmin", Session.isAdmin());
+        model.addAttribute("isWorker", Session.isWorker());
+        model.addAttribute("isLeader", Session.isLeader());
         return "/index";
     }
 
