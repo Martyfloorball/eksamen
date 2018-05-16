@@ -92,7 +92,13 @@ public class DatabaseHandler {
         }
     }
 
-    public void update() {
+    public void update(String query) {
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Something went wrong!");
+        }
 
     }
 
