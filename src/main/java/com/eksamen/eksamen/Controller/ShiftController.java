@@ -3,7 +3,8 @@ package com.eksamen.eksamen.Controller;
 import com.eksamen.eksamen.Base.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -12,15 +13,35 @@ import java.util.GregorianCalendar;
 @Controller
 public class ShiftController {
   private Calendar calendar = new GregorianCalendar();
+  private boolean isMonthShown = true;
+  private String[] months = {"Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"};
 
-  @GetMapping("/vagtplan")
+  @RequestMapping("/vagtplan/{action}")
+  public String change(@PathVariable("action") String action) {
+    System.out.println(action);
+    if (action.equals("next")) {
+      if (isMonthShown) {
+        calendar.add(Calendar.MONTH, 1);
+      } else {
+        calendar.add(Calendar.WEEK_OF_YEAR, 1);
+      }
+    } else if(action.equals("prev")) {
+      if (isMonthShown) {
+        calendar.add(Calendar.MONTH, -1);
+      } else {
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+      }
+    }
+    return "redirect:/vagtplan";
+  }
+
+  @RequestMapping("/vagtplan")
   public String vagtplan(Model model){
     System.out.println(Arrays.toString(getDates(calendar)));
-    System.out.println(Arrays.toString(getDisabled(calendar)));
-    model.addAttribute("isAdmin", Session.isAdmin());
-    model.addAttribute("isWorker", Session.isWorker());
-    model.addAttribute("isLeader", Session.isLeader());
-
+    model.addAttribute("dates", getDates(calendar));
+    model.addAttribute("isDisabled", getDisabled(calendar));
+    model.addAttribute("month_and_year", months[calendar.get(Calendar.MONTH)]+" "+calendar.get(Calendar.YEAR));
+    model.addAttribute("niveau", Session.getUserniveau());
     return "schedule";
   }
 
@@ -71,7 +92,7 @@ public class ShiftController {
   private int[] getPreviousMonthDates(Calendar calendar) {
     calendar.set(Calendar.DAY_OF_MONTH, 1);
 
-    int daysOfPreviousMonth = calendar.get(Calendar.DAY_OF_WEEK) - 2;
+    int daysOfPreviousMonth = (calendar.get(Calendar.DAY_OF_WEEK) == 1 ? 6 : calendar.get(Calendar.DAY_OF_WEEK) - 2);
     int[] daysToPrint = new int[daysOfPreviousMonth];
 
     calendar.add(Calendar.DATE, -1);

@@ -1,8 +1,7 @@
 package com.eksamen.eksamen.Base;
 
 public class Leader extends Staff{
-  @Override
-  public int getStaffNiveau() {
-    return super.getStaffNiveau() + 16;
+  public Leader(int staffId, String firstName, String lastName, String email, String password, int phonenumber, int staffNiveau) {
+    super(staffId, firstName, lastName, email, password, phonenumber, staffNiveau);
   }
 }

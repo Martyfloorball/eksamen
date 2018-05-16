@@ -1,8 +1,7 @@
 package com.eksamen.eksamen.Base;
 
 public class Admin extends Staff{
-  @Override
-  public int getStaffNiveau() {
-    return super.getStaffNiveau() + 15;
+  public Admin(int staffId, String firstName, String lastName, String email, String password, int phonenumber, int staffNiveau) {
+    super(staffId, firstName, lastName, email, password, phonenumber, staffNiveau);
   }
 }
