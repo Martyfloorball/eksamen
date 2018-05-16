@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    $(".openCreateNewShift").click(function () {
+    $(".openCreateNewShift").click(function (e) {
         $("#overlay, .createNewShift").show();
+        e.preventDefault();
     });
     $(".cancelCreateNewShift, #overlay").click(function () {
         $("#overlay, .popup-formular").hide();
