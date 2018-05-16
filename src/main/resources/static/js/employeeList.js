@@ -31,9 +31,9 @@ function getList() {
             $('#table').empty();
 
             $.each(data[0], function (key, value) {
-                $('#table').append('<th>' + value + '</th>')
+                $('#table').append('<th align="left">' + value + '</th>')
             });
-          $('#table').append('<th>' + 'value' + '</th>');
+          $('#table').append('<th align="left">' + 'Redigér' + '</th>');
 
 
           for (var i = 1; i < data.length; i++) {
