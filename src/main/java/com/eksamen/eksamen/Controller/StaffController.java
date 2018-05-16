@@ -4,6 +4,7 @@ import com.eksamen.eksamen.Base.Location;
 import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Base.Staff;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
+import com.eksamen.eksamen.StaffService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,11 @@ import java.util.ArrayList;
 
 @Controller
 public class StaffController {
-  public int getIdForStaff = 0;
 
   @GetMapping("/medarbejderliste")
   public String employeeList(Model model) {
     model.addAttribute("employee", new Staff());
-    model.addAttribute("locations", getLocations());
+    model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
@@ -75,9 +75,10 @@ public class StaffController {
   @GetMapping("/medarbejder")
   public String editStaff(Model model, @RequestParam String email) {
 
-    model.addAttribute("locations", getLocations());
-    model.addAttribute("employee", getStaff(email));
-    model.addAttribute("niveau", Session.getUserniveau());
+    model.addAttribute("employee", StaffService.getStaff(email));
+    model.addAttribute("locations", StaffService.getLocations());
+    model.addAttribute("currentLocations", StaffService.getCurrentLocations());
+
 
     return "staffEdit";
   }
@@ -97,17 +98,17 @@ public class StaffController {
             "email = '"+staff.getEmail()+"', "+
             "fk_staff_niveau_id = "+staff.getStaffNiveau()+" "+
             "WHERE "+
-            "staff_id = "+getIdForStaff
+            "staff_id = "+ StaffService.getIdForStaff
     );
 
     //Removing current locations for an employee
-    deleteForEmployee("staff_location","fk_staff_id");
+    StaffService.deleteForEmployee("staff_location","fk_staff_id");
 
     //Saving the locations for the employee to the database
     for (int i = 0; i < locationId.length; i++) {
       String[] location_columns = {"fk_staff_id", "fk_location_id"};
       ArrayList locationFilter = new ArrayList();
-      locationFilter.add(getIdForStaff);
+      locationFilter.add(StaffService.getIdForStaff);
       locationFilter.add(locationId[i]);
 
       DatabaseHandler.getInstance().insert("staff_location", location_columns, locationFilter);
@@ -121,101 +122,23 @@ public class StaffController {
   @PostMapping(value = "/medarbejder", params = "deleteEmployee=Slet")
   public String deleteEmployee() {
     //Removing current locations for an employee
-    deleteForEmployee("staff_location","fk_staff_id");
+    StaffService.deleteForEmployee("staff_location","fk_staff_id");
 
     //Removes shifts for an employee
-    deleteForEmployee("shift_request","fk_staff_id");
+    StaffService.deleteForEmployee("shift_request","fk_staff_id");
 
     //Removes employee
-    deleteForEmployee("staff","staff_id");
+    StaffService.deleteForEmployee("staff","staff_id");
 
 
     return "redirect:/medarbejderliste";
   }
 
-  /*
-  * Removes employee from database
-  */
-  public void deleteForEmployee(String table, String condition){
-    DatabaseHandler.getInstance().delete(
-        "DELETE FROM "+
-            table+" "+
-            "WHERE "+condition+"= "+getIdForStaff+"; "
-    );
-  }
 
-  public int getEmployeeId(String email) {
 
-    ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
-        "SELECT staff_id " +
-            "FROM staff " +
-            "WHERE " +
-            "email = '" + email + "'"
-    );
 
-    try {
-      resultSet.next();
 
-      getIdForStaff = resultSet.getInt("staff_id");
 
-      resultSet.close();
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
 
-    return getIdForStaff;
-  }
-
-  public Staff getStaff(String email) {
-    Staff staffEdit = new Staff();
-
-    getEmployeeId(email);
-
-    ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
-        "SELECT firstname, lastname, phone, email, fk_staff_niveau_id " +
-            "FROM " +
-            "staff " +
-            "WHERE " +
-            "email = '" + email + "'"
-    );
-
-    try {
-      resultSet.next();
-
-      staffEdit.setFirstName(resultSet.getString("firstname"));
-      staffEdit.setLastName(resultSet.getString("lastname"));
-      staffEdit.setPhonenumber(resultSet.getInt("phone"));
-      staffEdit.setEmail(resultSet.getString("email"));
-      staffEdit.setStaffNiveau(resultSet.getInt("fk_staff_niveau_id"));
-
-      resultSet.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return staffEdit;
-  }
-
-  /*
-  Method to get all the locations in the database into an array
-  */
-  public ArrayList<Location> getLocations() {
-    ArrayList<Location> locations = new ArrayList();
-
-    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select location_id, location_name\n" +
-        "from location inner join staff_location l on location.location_id = l.fk_location_id\n" +
-        "inner join staff s on l.fk_staff_id = s.staff_id\n" +
-        "where staff_id = " + Session.getId());
-
-    try {
-      while (resultSet.next()) {
-        locations.add(new Location(resultSet.getInt("location_id"), resultSet.getString("location_name")));
-      }
-      resultSet.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-
-    return locations;
-  }
 }
