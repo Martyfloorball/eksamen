@@ -12,6 +12,7 @@
 
         <!---JQUERY--->
         <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+        <script src="js/schedule.js"></script>
 
         <style>
             #plan-menu {
@@ -88,9 +89,6 @@
                 font-weight: bold;
                 background-color: #fff;
             }
-            #createShift{
-                float: right;
-            }
 
             #month-viewer #weeknames .weekname:not(:last-child) {
                 
@@ -103,6 +101,8 @@
     </head>
     <body>
         <div th:replace="includes/topMenu::topMenu"></div>
+        <div th:replace="includes/createShift::createNewShift"></div>
+        <div id="overlay"></div>
         <div id="planner">
             <div id="plan-menu">
 
@@ -112,7 +112,7 @@
                     <div id="right-btn"><i class="fa fa-caret-right"></i></div>
                 </div>
                 <div id="today">I dag</div>
-                <button class="btn-green" id="createShift">Opret Vagt</button>
+                <button class="btn-green createNewShift openCreateNewShift" th:if="${niveau} == 15">Opret Vagt</button>
                 <div class="clear"></div>
             </div>
             <div id="month-viewer">
