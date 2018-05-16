@@ -74,6 +74,7 @@ public class StaffController {
 
     model.addAttribute("locations", getLocations());
     model.addAttribute("employee", getStaff(email));
+    model.addAttribute("niveau", Session.getUserniveau());
 
     return "staffEdit";
   }
