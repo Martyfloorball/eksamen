@@ -536,3 +536,58 @@ ul {
 .createNewShift{
     float: right;
 }
+
+/*start*/
+.header{
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 5px;
+}
+
+.chooseDate{
+    margin-top: 10px !important;
+}
+
+.weekDays input{
+    display: none !important;
+}
+
+.weekDays input[type=checkbox] + label{
+    display: inline-block;
+    border-radius: 6px;
+    background: #dddddd;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    margin: 2px !important;
+}
+
+.weekDays input[type=checkbox]:checked + label{
+    background-color: #2AD705;
+    color: #ffffff;
+}
+
+.date-start, .date-end{
+    border: 1px;
+}
+
+.createNewShift label{
+    margin: 0 100px 20px 0;
+}
+
+.createNewShift input[type=submit] {
+    float: right;
+}
+
+.createNewShift textarea[type=text]{
+    resize: none;
+    height: 100px;
+    width: 250px;
+    border: solid 1px #dddddd;
+}
+
+.createNewShift td{
+    vertical-align: top;
+}

@@ -1,0 +1,99 @@
+<div class="popup-formular box-body createNewShift" th:fragment="createNewShift"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <form method="post" th:action="@{/vagtplan}" class="createShiftForm">
+        <table class="popup-table createNewShift">
+            <tr>
+                <td class="header">Opret Vagt</td>
+                <td class="header">
+                    <button type="button" class="pull-right bg-white cancelCreateNewShift"><i
+                            class="fas fa-times"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="chooseDate" for="chooseDate">Dato</label>
+                </td>
+                <td>
+                    <input class="date-start" id="chooseDate" type="date"/>
+                    <input class="date-end" type="date"/>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="weekDays">
+                        <input id="weekDaySun" type="checkbox" class="weekDay">
+                        <label for="weekDaySun">
+                            <small>S</small>
+                        </label>
+                        <input id="weekDaySat" type="checkbox" class="weekDay">
+                        <label for="weekDaySat">
+                            <small>L</small>
+                        </label>
+                        <input id="weekDayFri" type="checkbox" class="weekDay">
+                        <label for="weekDayFri">
+                            <small>F</small>
+                        </label>
+                        <input id="weekDayThu" type="checkbox" class="weekDay">
+                        <label for="weekDayThu">
+                            <small>T</small>
+                        </label>
+                        <input id="weekDayWen" type="checkbox" class="weekDay">
+                        <label for="weekDayWen">
+                            <small>O</small>
+                        </label>
+                        <input id="weekDayTue" type="checkbox" class="weekDay">
+                        <label for="weekDayTue">
+                            <small>T</small>
+                        </label>
+                        <input id="weekDayMon" type="checkbox" class="weekDay">
+                        <label for="weekDayMon">
+                            <small>M</small>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="time-start">Tid</label>
+                </td>
+                <td>
+                    <input id="time-start" type="time"/>
+                    <input id="time-end" type="time"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="chooseLocation">Anlæg</label>
+                </td>
+                <td>
+                    <select id="chooseLocation">
+                        <option value="choose">Vælg Anlæg...</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="chooseEmployee">Medarbejder</label>
+                </td>
+                <td>
+                    <select id="chooseEmployee">
+                        <option value="choose">Vælg Medarbejder...</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="comment">Bemærkninger</label>
+                </td>
+                <td>
+                    <textarea id="comment" type="text" placeholder="Indtast Bemærkning..."></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input name="saveShift" type="submit" value="Opret" class="btn-green"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
