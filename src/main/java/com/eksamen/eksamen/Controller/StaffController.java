@@ -78,6 +78,9 @@ public class StaffController {
     return "staffEdit";
   }
 
+  /*
+  Method that edits an employee and saves the changes to the database
+  */
   @PostMapping(value = "/medarbejder", params = "editEmployee=Save")
   public String editEmployee(@RequestParam("checkboxes") int[] locationId, @ModelAttribute Staff staff) {
 
@@ -93,15 +96,48 @@ public class StaffController {
             "staff_id = "+getIdForStaff
     );
 
+    //Removing current locations for an employee
+    deleteForEmployee("staff_location","fk_staff_id");
+
+    //Saving the locations for the employee to the database
+    for (int i = 0; i < locationId.length; i++) {
+      String[] location_columns = {"fk_staff_id", "fk_location_id"};
+      ArrayList locationFilter = new ArrayList();
+      locationFilter.add(getIdForStaff);
+      locationFilter.add(locationId[i]);
+
+      DatabaseHandler.getInstance().insert("staff_location", location_columns, locationFilter);
+    }
+    return "redirect:/medarbejderliste";
+  }
+
+  /*
+  * Method that deletes an employee from the database
+  */
+  @PostMapping(value = "/medarbejder", params = "deleteEmployee=Slet")
+  public String deleteEmployee() {
+    //Removing current locations for an employee
+    deleteForEmployee("staff_location","fk_staff_id");
+
+    //Removes shifts for an employee
+    deleteForEmployee("shift_request","fk_staff_id");
+
+    //Removes employee
+    deleteForEmployee("staff","staff_id");
+
 
     return "redirect:/medarbejderliste";
   }
 
-  @PostMapping(value = "/medarbejder", params = "deleteEmployee=Slet")
-  public String deleteEmployee() {
-    System.out.println("slet medarbejder");
-
-    return "redirect:/medarbejderliste";
+  /*
+  * Removes employee from database
+  */
+  public void deleteForEmployee(String table, String condition){
+    DatabaseHandler.getInstance().delete(
+        "DELETE FROM "+
+            table+" "+
+            "WHERE "+condition+"= "+getIdForStaff+"; "
+    );
   }
 
   public int getEmployeeId(String email) {

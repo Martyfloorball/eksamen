@@ -99,11 +99,15 @@ public class DatabaseHandler {
             e.printStackTrace();
             System.out.println("Something went wrong!");
         }
-
     }
 
-    public void delete() {
-
+    public void delete(String query) {
+      try {
+        statement.executeUpdate(query);
+      } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Something went wrong!");
+      }
     }
 
     public ResultSet select(String table, String column, String where, String order, int limit, String group, String having) {
