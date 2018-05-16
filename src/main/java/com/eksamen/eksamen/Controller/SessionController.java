@@ -31,13 +31,16 @@ public class SessionController {
     }
 
     @GetMapping("/profile")
-    public String profile(){
+    public String profile(Model model){
+      model.addAttribute("niveau", Session.getUserniveau());
         return "user/profile";
     }
 
     @GetMapping("/settings")
-    public String settings(){
-        return "user/settings";
+    public String settings(Model model){
+      model.addAttribute("niveau", Session.getUserniveau());
+
+      return "user/settings";
     }
 
 
