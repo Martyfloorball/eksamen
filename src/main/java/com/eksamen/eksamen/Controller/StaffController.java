@@ -8,15 +8,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 public class StaffController {
+  public int getIdForStaff = 0;
 
   @GetMapping("/medarbejderliste")
   public String employeeList(Model model) {
@@ -72,26 +71,73 @@ public class StaffController {
 
   @GetMapping("/medarbejder")
   public String editStaff(Model model, @RequestParam String email) {
+
     model.addAttribute("locations", getLocations());
     model.addAttribute("employee", getStaff(email));
+
     return "staffEdit";
   }
 
-  @PostMapping("/medarbejder")
-  public String editStaffOrDelete() {
+  @PostMapping(value = "/medarbejder", params = "editEmployee=Save")
+  public String editEmployee(@RequestParam("checkboxes") int[] locationId, @ModelAttribute Staff staff) {
+
+    DatabaseHandler.getInstance().update(
+        "UPDATE staff "+
+            "SET "+
+            "firstname = '"+staff.getFirstName()+"', "+
+            "lastname = '"+staff.getLastName()+"', "+
+            "phone = '"+staff.getPhonenumber()+"', "+
+            "email = '"+staff.getEmail()+"', "+
+            "fk_staff_niveau_id = "+staff.getStaffNiveau()+" "+
+            "WHERE "+
+            "staff_id = "+getIdForStaff
+    );
+
+
     return "redirect:/medarbejderliste";
   }
 
-  public Staff getStaff(String email){
+  @PostMapping(value = "/medarbejder", params = "deleteEmployee=Slet")
+  public String deleteEmployee() {
+    System.out.println("slet medarbejder");
 
+    return "redirect:/medarbejderliste";
+  }
+
+  public int getEmployeeId(String email) {
+
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
+        "SELECT staff_id " +
+            "FROM staff " +
+            "WHERE " +
+            "email = '" + email + "'"
+    );
+
+    try {
+      resultSet.next();
+
+      getIdForStaff = resultSet.getInt("staff_id");
+
+      resultSet.close();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return getIdForStaff;
+  }
+
+  public Staff getStaff(String email) {
     Staff staffEdit = new Staff();
+
+    getEmployeeId(email);
 
     ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
         "SELECT firstname, lastname, phone, email, fk_staff_niveau_id " +
             "FROM " +
             "staff " +
             "WHERE " +
-            "email = '"+ email +"'"
+            "email = '" + email + "'"
     );
 
     try {
@@ -103,12 +149,10 @@ public class StaffController {
       staffEdit.setEmail(resultSet.getString("email"));
       staffEdit.setStaffNiveau(resultSet.getInt("fk_staff_niveau_id"));
 
-
+      resultSet.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    System.out.println(staffEdit);
-
     return staffEdit;
   }
 

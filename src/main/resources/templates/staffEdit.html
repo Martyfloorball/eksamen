@@ -17,30 +17,33 @@
 <div th:replace="includes/topMenu::topMenu"></div>
 <form method="post" th:action="@{/medarbejder}">
     <div class="row">
-        <div class="col-6 logo">
+        <div class="col-1">
+            <a href="/medarbejderliste"><i class="fas fa-arrow-left"> Tilbage</i></a>
+        </div>
+        <div class="col-5 logo">
             <img src="https://placehold.it/300x300" class="center img-circle-300"/>
         </div>
         <div class="col-6 userinfo">
             <div class="row">
                 <div class="col-6">
                     <label for="fornavn">Fornavn</label>
-                    <input type="text" id="fornavn" th:value="${employee.firstName}" required="true">
+                    <input name="firstName" type="text" id="fornavn" th:value="${employee.firstName}" required="true">
                 </div>
                 <div class="col-6">
                     <label for="efternavn">Efternavn</label>
-                    <input type="text" id="efternavn" th:value="${employee.lastName}" required="true">
+                    <input name="lastName" type="text" id="efternavn" th:value="${employee.lastName}" required="true">
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <label for="email">E-mail</label>
-                    <input type="text" id="email" th:value="${employee.email}" required="true">
+                    <input name="email" type="text" id="email" th:value="${employee.email}" required="true">
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <label for="telefon">Telefon</label>
-                    <input type="text" id="telefon" th:value="${employee.phonenumber}" required="true">
+                    <input name="phonenumber" type="text" id="telefon" th:value="${employee.phonenumber}" required="true">
                 </div>
             </div>
             <hr>
@@ -63,7 +66,7 @@
                     <label for="stilling">Stilling</label>
                 </div>
                 <div class="col-6">
-                    <select id="stilling" class="pull-right"
+                    <select name="staffNiveau" id="stilling" class="pull-right"
                             th:value="${employee.staffNiveau}" required="true">
                         <option  th:selected="${employee.staffNiveau == 17}" value="17">Medarbejder</option>
                         <option  th:selected="${employee.staffNiveau == 16}" value="16">Centerleder</option>
@@ -72,8 +75,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-
+                <div class="col-6">
+                    <input name="deleteEmployee" type="submit" value="Slet" class="btn-white">
+                </div>
+                <div class="col-6">
+                    <input name="editEmployee" type="submit" value="Save" class="btn-green pull-right">
                 </div>
             </div>
         </div>
