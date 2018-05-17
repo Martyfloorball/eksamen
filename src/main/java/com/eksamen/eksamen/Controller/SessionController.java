@@ -32,14 +32,17 @@ public class SessionController {
 
     @GetMapping("/profile")
     public String profile(Model model){
-      model.addAttribute("niveau", Session.getUserniveau());
+        model.addAttribute("isAdmin", Session.isAdmin());
+        model.addAttribute("isWorker", Session.isWorker());
+        model.addAttribute("isLeader", Session.isLeader());
         return "user/profile";
     }
 
     @GetMapping("/settings")
     public String settings(Model model){
-      model.addAttribute("niveau", Session.getUserniveau());
-
+        model.addAttribute("isAdmin", Session.isAdmin());
+        model.addAttribute("isWorker", Session.isWorker());
+        model.addAttribute("isLeader", Session.isLeader());
       return "user/settings";
     }
 
