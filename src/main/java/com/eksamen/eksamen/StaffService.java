@@ -98,6 +98,9 @@ public class StaffService {
     );
   }
 
+  /*
+  * Method to get the employees locations
+  */
   public static ArrayList getCurrentLocations(){
     ArrayList<Integer> currentLocations = new ArrayList<>();
     System.out.println(getIdForStaff);

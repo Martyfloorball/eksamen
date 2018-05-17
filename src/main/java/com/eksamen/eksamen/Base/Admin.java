@@ -1,11 +1,11 @@
 package com.eksamen.eksamen.Base;
 
-public class Admin extends Staff implements inta{
+public class Admin extends Staff{
 
   public Admin() { }
 
   @Override
-  public void setStaffNiveau(){
-    super.setStaffNiveau(15);
+  public int getStaffNiveau(){
+    return super.getStaffNiveau()+15;
   }
 }
