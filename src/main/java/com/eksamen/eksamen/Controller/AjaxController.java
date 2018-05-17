@@ -1,7 +1,9 @@
 package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Base.Admin;
+import com.eksamen.eksamen.Base.Leader;
 import com.eksamen.eksamen.Base.Session;
+import com.eksamen.eksamen.Base.Worker;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,11 +26,11 @@ public class AjaxController {
 
     //Is used in the query to filter the employees to the selected locations
     String filter = "";
-    if (filterLocations.length >= 1) {
-      filter += "WHERE location_id = '" + filterLocations[0] + "'";
+    if(filterLocations.length >= 0) {
+      filter += "location_id = '" + filterLocations[0] + "' ";
 
       if (filterLocations.length > 1) {
-        for (int i = 0; i < filterLocations.length; i++) { //need to skip the first placeholder in the arraylist
+        for (int i = 1; i < filterLocations.length; i++) { //need to skip the first placeholder in the arraylist
           filter += " OR location_id = '" + filterLocations[i] + "'";
         }
       }
@@ -43,15 +45,14 @@ public class AjaxController {
 
     staffs.add(getColumnLabel(columnLabels, isAdmin));
 
-    //First the admins
+    //Firstly adding all the admins to the list
     isAdmin(isAdmin, filter, columnLabels, staffs);
 
     //Secondly the leaders
+    isLeader(isAdmin, filter, columnLabels, staffs);
 
     //Thirdly the workers
-
-
-
+    isWorker(isAdmin, filter, columnLabels, staffs);
 
     return staffs;
   }
@@ -145,8 +146,6 @@ public class AjaxController {
 
   public ArrayList isAdmin(String isAdmin, String filter, ArrayList columnLabels, ArrayList staffs) {
     Admin admin = new Admin();
-//    ArrayList admins = new ArrayList();
-    System.out.println(admin.getStaffNiveau());
     try {
       ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT " +
           "CONCAT(firstname, ' ', lastname) AS Navn, " +
@@ -157,8 +156,8 @@ public class AjaxController {
           "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id " +
           "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id " +
           "INNER JOIN location l2 ON l.fk_location_id = l2.location_id " +
-          filter+
-          " AND staff_niveau_id = '" + admin.getStaffNiveau()+"' "
+          "WHERE (" + filter +") "+
+          " AND staff_niveau_id = " + admin.getStaffNiveau() + " "
       );
 
       //Adds the employee information to the array
@@ -176,7 +175,65 @@ public class AjaxController {
     return staffs;
   }
 
-//  public ArrayList isStaff(String isAdmin, String filter){}
+  public ArrayList isLeader(String isAdmin, String filter, ArrayList columnLabels, ArrayList staffs){
+    Leader leader = new Leader();
+    try {
+      ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT " +
+          "CONCAT(firstname, ' ', lastname) AS Navn, " +
+          isAdmin +
+          "location_name AS Anlæg, " +
+          "niveau_name AS Stilling " +
+          "FROM staff " +
+          "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id " +
+          "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id " +
+          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id " +
+          "WHERE (" + filter +") "+
+          " AND staff_niveau_id = " + leader.getStaffNiveau() + " "
+      );
 
-//  public ArrayList isWorker(String isAdmin, String filter){}
+      //Adds the employee information to the array
+      while (rs.next()) {
+        ArrayList<String> staff = new ArrayList<>();
+
+        for (int i = 1; i < columnLabels.size() + 1; i++) {
+          staff.add(rs.getString(i));
+        }
+        staffs.add(staff);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return staffs;
+  }
+
+  public ArrayList isWorker(String isAdmin, String filter, ArrayList columnLabels, ArrayList staffs){
+    Worker worker = new Worker();
+    try {
+      ResultSet rs = DatabaseHandler.getInstance().querySelect(" SELECT " +
+          "CONCAT(firstname, ' ', lastname) AS Navn, " +
+          isAdmin +
+          "location_name AS Anlæg, " +
+          "niveau_name AS Stilling " +
+          "FROM staff " +
+          "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id " +
+          "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id " +
+          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id " +
+          "WHERE (" + filter +") "+
+          " AND staff_niveau_id = " + worker.getStaffNiveau() + " "
+      );
+
+      //Adds the employee information to the array
+      while (rs.next()) {
+        ArrayList<String> staff = new ArrayList<>();
+
+        for (int i = 1; i < columnLabels.size() + 1; i++) {
+          staff.add(rs.getString(i));
+        }
+        staffs.add(staff);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return staffs;
+  }
 }
