@@ -12,7 +12,7 @@
                 <i class="fa fa-calendar-alt"></i>Vagtplan
             </a>
         </li>
-        <li th:if="${niveau} == 15">
+        <li th:if="${isAdmin} OR ${isLeader}">
             <a href="medarbejderliste">
                 <i class="fa fa-users"></i>Medarbejdere
             </a>

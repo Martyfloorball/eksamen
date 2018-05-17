@@ -24,7 +24,6 @@ public class StaffController {
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
-
     return "employeeList";
   }
 
