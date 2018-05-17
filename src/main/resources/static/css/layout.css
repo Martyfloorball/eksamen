@@ -533,15 +533,7 @@ ul {
     color: white;
 }
 
-.createNewShift{
-    float: right;
-}
-
 /*start*/
-.header{
-    border-bottom: 1px solid #eeeeee;
-    padding-bottom: 5px;
-}
 
 .chooseDate{
     margin-top: 10px !important;
@@ -549,6 +541,7 @@ ul {
 
 .weekDays input{
     display: none !important;
+    float: right;
 }
 
 .weekDays input[type=checkbox] + label{
@@ -560,7 +553,6 @@ ul {
     line-height: 30px;
     text-align: center;
     cursor: pointer;
-    float: right;
     margin: 2px !important;
 }
 
@@ -574,20 +566,33 @@ ul {
 }
 
 .createNewShift label{
-    margin: 0 100px 20px 0;
-}
-
-.createNewShift input[type=submit] {
-    float: right;
+    size: auto;
+    margin: 0 0px 30px 0;
 }
 
 .createNewShift textarea[type=text]{
     resize: none;
     height: 100px;
-    width: 250px;
+    width: 100%;
     border: solid 1px #dddddd;
+}
+
+.createNewShift input[type=submit]{
+    float: right;
 }
 
 .createNewShift td{
     vertical-align: top;
 }
+
+.inputShift,
+.createNewShift{
+    float: right;
+}
+
+.createNewShift .col-12,
+.createNewShift .col-6{
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
