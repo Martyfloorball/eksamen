@@ -50,18 +50,15 @@
                     <label for="setLocation">Lokationer</label>
                 </div>
                 <div class="col-6">
-                    <div id="setLocation" th:each="location : ${currentLocations}">
+                    <div id="setLocation">
+                        <th:block th:each="location : ${locations}">
+                            <!--<th:block th:each="currentLocation : ${currentLocations}">-->
 
-                            <input th:checked="${location == 1}" type="checkbox" name="checkboxes"
-                                   value="1"/> Rødovrehallen <br/>
-                            <input th:checked="${location == 2}" type="checkbox" name="checkboxes"
-                                   value="2"/> Skøjte Arena <br/>
-                            <input th:checked="${location == 3}" type="checkbox" name="checkboxes"
-                                   value="3"/> Espelundens Idrætsanlæg <br/>
-                            <input th:checked="${location == 4}" type="checkbox" name="checkboxes"
-                                   value="4"/> Stadionhal <br/>
-                            <input th:checked="${location == 5}" type="checkbox" name="checkboxes"
-                                   value="5"/> Islevbadet <br/></th:block>
+
+                                <input th:checked="${currentLocations[0] == location.locationId}" type="checkbox" name="checkboxes" th:text="${location.locationName}"
+                                       th:value="${location.locationId}"/> <br/>
+
+                        </th:block>
                     </div>
                 </div>
             </div>
