@@ -41,7 +41,9 @@ public class ShiftController {
     model.addAttribute("dates", getDates(calendar));
     model.addAttribute("isDisabled", getDisabled(calendar));
     model.addAttribute("month_and_year", months[calendar.get(Calendar.MONTH)]+" "+calendar.get(Calendar.YEAR));
-    model.addAttribute("niveau", Session.getUserniveau());
+    model.addAttribute("isAdmin", Session.isAdmin());
+    model.addAttribute("isWorker", Session.isWorker());
+    model.addAttribute("isLeader", Session.isLeader());
     return "schedule";
   }
 
