@@ -99,7 +99,7 @@ public class StaffService {
   }
 
   public static ArrayList getCurrentLocations(){
-    ArrayList currentLocations = new ArrayList();
+    ArrayList<Integer> currentLocations = new ArrayList<>();
     System.out.println(getIdForStaff);
 
     ResultSet resultSet = DatabaseHandler.getInstance().querySelect(

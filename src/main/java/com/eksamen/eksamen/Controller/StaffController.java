@@ -74,12 +74,22 @@ public class StaffController {
 
   @GetMapping("/medarbejder")
   public String editStaff(Model model, @RequestParam String email) {
-
     model.addAttribute("employee", StaffService.getStaff(email));
     model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("currentLocations", StaffService.getCurrentLocations());
+    ArrayList boo = new ArrayList();
+    boolean bb = false;
+    for (int i = 0; i < StaffService.getLocations().size(); i++){
+      for (Object j : StaffService.getCurrentLocations())
+        if(StaffService.getLocations().get(i).getLocationId() == Integer.parseInt(j.toString())){
+          bb = true;
 
-
+        }
+      boo.add(bb);
+      bb = false;
+    }
+    model.addAttribute("boo" , boo);
+    System.out.println(boo);
     return "staffEdit";
   }
 

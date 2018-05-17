@@ -51,13 +51,10 @@
                 </div>
                 <div class="col-6">
                     <div id="setLocation">
-                        <th:block th:each="location : ${locations}">
-                            <!--<th:block th:each="currentLocation : ${currentLocations}">-->
-
-
-                                <input th:checked="${currentLocations[0] == location.locationId}" type="checkbox" name="checkboxes" th:text="${location.locationName}"
-                                       th:value="${location.locationId}"/> <br/>
-
+                        <th:block th:each="location, itrStat : ${locations}">
+                                <input th:checked="${boo[itrStat.index]}" type="checkbox" name="checkboxes" th:text="${location.locationName}"
+                                       th:value="${location.locationId}" />
+                            <br>
                         </th:block>
                     </div>
                 </div>
