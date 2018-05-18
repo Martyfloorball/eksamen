@@ -92,6 +92,11 @@ public class DatabaseHandler {
         }
     }
 
+    /**
+     * Update query
+     *
+     * @author Martin Jensen
+     * */
     public void update(String query) {
         try {
             statement.executeUpdate(query);
@@ -101,6 +106,11 @@ public class DatabaseHandler {
         }
     }
 
+    /**
+     * Delete query
+     *
+     * @author Martin Jensen
+     * */
     public void delete(String query) {
       try {
         statement.executeUpdate(query);
