@@ -110,7 +110,7 @@
                             <option value="0" disabled selected hidden>Vælg Medarbejder...</option>
                             <option th:each="staff : ${staffs}"
                                     th:value="${staff.staffId}"
-                                    th:text="${staff.firstname} + ' ' + ${staff.lastname}"></option>
+                                    th:text="${staff.firstName} + ' ' + ${staff.lastName}"></option>
                         </select>
                     </div>
                 </div>

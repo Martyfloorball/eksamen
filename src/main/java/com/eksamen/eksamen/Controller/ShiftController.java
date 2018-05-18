@@ -213,8 +213,7 @@ public class ShiftController {
   public ArrayList<Staff> getStaff(){
     ArrayList<Staff> staffs = new ArrayList<>();
 
-    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select staff_id, firstname, lastname" +
-            "from staff");
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select staff_id, firstname, lastname from staff");
 
     try {
       //adding staff to an arraylist
