@@ -119,7 +119,6 @@ public class StaffService {
    */
   public static ArrayList getCurrentLocations(){
     ArrayList<Integer> currentLocations = new ArrayList<>();
-    System.out.println(getIdForStaff);
 
     ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
         "SELECT fk_location_id "+
@@ -134,8 +133,6 @@ public class StaffService {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
-    System.out.println(currentLocations);
 
     return currentLocations;
   }

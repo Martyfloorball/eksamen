@@ -12,6 +12,17 @@
 
     <!---JQUERY--->
     <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+
+    <style>
+        .btn-red {
+            color: white;
+            background: red;
+            border: 1px solid red;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: medium;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="includes/topMenu::topMenu"></div>
@@ -75,7 +86,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <input name="deleteEmployee" type="submit" value="Slet" class="btn-white">
+                    <input name="deleteEmployee" type="submit" value="Slet" class="btn-red">
                 </div>
                 <div class="col-6">
                     <input name="editEmployee" type="submit" value="Save" class="btn-green pull-right">
