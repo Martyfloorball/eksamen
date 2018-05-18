@@ -143,11 +143,12 @@ public class StaffController {
     return "redirect:/medarbejderliste";
   }
 
+  public ArrayList<Employee> getEmployees(){
+    ArrayList<Employees> employees = new ArrayList<>();
 
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select staff_id, firstname, lastname" +
+            "from staff ");
 
-
-
-
-
-
+    return employees;
+  }
 }

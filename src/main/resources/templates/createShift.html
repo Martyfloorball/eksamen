@@ -11,6 +11,8 @@
 
     <!---JQUERY--->
     <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="js/schedule.js"></script>
+
 </head>
 <body>
 <div th:replace="includes/topMenu::topMenu"></div>
@@ -30,11 +32,6 @@
                 <div class="col-6">
                     <input class="date-start" id="chooseDate" type="date"/>
                     <input class="date-end" type="date"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6">
                     <div class="weekDays">
                         <input id="weekDayMon" type="checkbox" class="weekDay">
                         <label for="weekDayMon">
@@ -82,11 +79,9 @@
             </div>
             <div class="col-12">
                 <div class="row">
+                    <div class="col-6"></div>
                     <div class="col-6">
-                        <label for="repeat">Gentag vagt</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="repeat" type="checkbox">
+                        <input id="repeat" type="checkbox"> Gentag vagt
                     </div>
                 </div>
             </div>
@@ -97,7 +92,10 @@
                     </div>
                     <div class="col-6">
                         <select id="chooseLocation">
-                            <option value="choose">Vælg Anlæg...</option>
+                            <option value="0" disabled selected hidden>Vælg Anlæg...</option>
+                            <option th:each="location : ${locations}"
+                            th:value="${location.locationId}"
+                            th:text="${location.locationName}"></option>
                         </select>
                     </div>
                 </div>
@@ -109,7 +107,7 @@
                     </div>
                     <div class="col-6">
                         <select id="chooseEmployee">
-                            <option value="choose">Vælg Medarbejder...</option>
+                            <option value="0" disabled selected hidden>Vælg Medarbejder...</option>
                         </select>
                     </div>
                 </div>

@@ -527,13 +527,11 @@ ul {
     font-size: 15px;
 }
 
-.location, .role{
+.userInfo .location, .role{
     border: none !important;
     background-color: #999999;
     color: white;
 }
-
-/*start*/
 
 .chooseDate{
     margin-top: 10px !important;
@@ -574,7 +572,7 @@ ul {
     resize: none;
     height: 100px;
     width: 100%;
-    border: solid 1px #dddddd;
+    border: solid 1px #cccccc;
 }
 
 .createNewShift input[type=submit]{
@@ -594,5 +592,54 @@ ul {
 .createNewShift .col-6{
     padding-right: 0 !important;
     padding-left: 0 !important;
+}
+
+.date-start,
+.date-end{
+    background: #ecf0f1;
+    font-size: 15px;
+    color: #95a5a6;
+    border: 1px solid #ecf0f1;
+    padding: 5px;
+}
+
+.createNewShift input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+.weekDays{
+    padding-top: 5px;
+}
+
+.createNewShift select{
+    border: 1px solid #cccccc;
+    font-size: 12px;
+    height: 30px;
+    width: 200px;
+}
+
+.createNewShift label{
+    margin-left: 30px;
+}
+
+.weekDays,
+.date-end{
+    display: none;
+}
+
+.createNewShift input[type=time]{
+    border: 1px solid #cccccc;
+    height: 20px;
+    width: 100px;
+}
+
+#time-start,
+#time-end{
+    position: center;
+    font-size: 15px;
+
+}
+.createNewShift input[type="time"]::-webkit-inner-spin-button {
+    display: none;
 }
 
