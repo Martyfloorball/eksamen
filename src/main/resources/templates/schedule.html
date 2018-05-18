@@ -12,7 +12,6 @@
 
         <!---JQUERY--->
         <script src="lib/jquery/jquery-3.3.1.min.js"></script>
-        <script src="js/schedule.js"></script>
 
         <style>
             #plan-menu {
@@ -120,11 +119,31 @@
 
             #month-viewer .days .day .date {
                 color: #333;
-                text-align: right;
+                float: right;
             }
 
             #month-viewer .days .day.disabled .date {
                 color: #999;
+            }
+
+            #month-viewer .shifts {
+                float: left;
+                width: 90%;
+            }
+
+            #month-viewer .shifts .shift {
+                margin: 0 0 5px 0;
+                padding: 5px;
+                font-size: 12.5px;
+            }
+
+            #month-viewer .shifts .shift .time {
+                font-size: 17.5px;
+                font-weight: bold;
+            }
+
+            #month-viewer .shifts .shift .location {
+                font-size: 15px;
             }
 
             .clear {
@@ -164,24 +183,61 @@
                     <div>
                         <div class="day" th:classappend="${isDisabled[i + 0]} ? 'disabled'">
                             <p class="date" th:text="${dates[i + 0]}"></p>
+                            <div class="shifts">
+                                <div class="shift" th:each="shift : ${shifts[i + 0]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
+                                    <p class="time" th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="location" th:text="${shift.location}"></p>
+                                    <p class="staff" th:text="${shift.staffName}"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="day" th:classappend="${isDisabled[i + 1]} ? 'disabled'">
                             <p class="date" th:text="${dates[i + 1]}"></p>
+                            <div class="shifts">
+                                <div class="shift" th:each="shift : ${shifts[i + 1]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
+                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="day" th:classappend="${isDisabled[i + 2]} ? 'disabled'">
                             <p class="date" th:text="${dates[i + 2]}"></p>
+                            <div class="shifts">
+                                <div class="shift" th:each="shift : ${shifts[i + 2]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
+                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="day" th:classappend="${isDisabled[i + 3]} ? 'disabled'">
                             <p class="date" th:text="${dates[i + 3]}"></p>
+                            <div class="shifts">
+                                <div class="shift" th:each="shift : ${shifts[i + 3]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
+                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="day" th:classappend="${isDisabled[i + 4]} ? 'disabled'">
                             <p class="date" th:text="${dates[i + 4]}"></p>
+                            <div class="shifts">
+                                <div class="shift" th:each="shift : ${shifts[i + 4]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
+                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="day" th:classappend="${isDisabled[i + 5]} ? 'disabled'">
                             <p class="date" th:text="${dates[i + 5]}"></p>
+                            <div class="shifts">
+                                <div class="shift" th:each="shift : ${shifts[i + 5]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
+                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="day" th:classappend="${isDisabled[i + 6]} ? 'disabled'">
                             <p class="date" th:text="${dates[i + 6]}"></p>
+                            <div class="shifts">
+                                <div class="shift" th:each="shift : ${shifts[i + 6]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
+                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="clear"></div>
