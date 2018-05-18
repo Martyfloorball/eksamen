@@ -46,7 +46,7 @@ function getList() {
                 $('#table').append(string)
             }
 
-          // console.log(data);
+           console.log(data);
         }
     });
 }

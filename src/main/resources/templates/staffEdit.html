@@ -40,7 +40,8 @@
             <div class="row">
                 <div class="col-12">
                     <label for="telefon">Telefon</label>
-                    <input name="phonenumber" type="text" id="telefon" th:value="${employee.phonenumber}" required="true">
+                    <input name="phonenumber" type="text" id="telefon" th:value="${employee.phonenumber}"
+                           required="true">
                 </div>
             </div>
             <hr>
@@ -50,9 +51,10 @@
                 </div>
                 <div class="col-6">
                     <div id="setLocation">
-                        <th:block th:each="location : ${locations}">
-                            <input type="checkbox" name="checkboxes" th:text="${location.locationName}"
-                                   th:value="${location.locationId}" /> <br/>
+                        <th:block th:each="location, itrStat : ${locations}">
+                                <input th:checked="${boo[itrStat.index]}" type="checkbox" name="checkboxes" th:text="${location.locationName}"
+                                       th:value="${location.locationId}" />
+                            <br>
                         </th:block>
                     </div>
                 </div>
@@ -65,9 +67,9 @@
                 <div class="col-6">
                     <select name="staffNiveau" id="stilling" class="pull-right"
                             th:value="${employee.staffNiveau}" required="true">
-                        <option  th:selected="${employee.staffNiveau == 17}" value="17">Medarbejder</option>
-                        <option  th:selected="${employee.staffNiveau == 16}" value="16">Centerleder</option>
-                        <option  th:selected="${employee.staffNiveau == 15}" value="15">Admin</option>
+                        <option th:selected="${employee.staffNiveau == 17}" value="17">Medarbejder</option>
+                        <option th:selected="${employee.staffNiveau == 16}" value="16">Centerleder</option>
+                        <option th:selected="${employee.staffNiveau == 15}" value="15">Admin</option>
                     </select>
                 </div>
             </div>

@@ -39,10 +39,14 @@
                             <form method="post" th:action="@{/medarbejderliste}">
                                 <h2>Filtrér Anlæg:</h2>
                                 <th:block th:each="location : ${locations}">
-                                    <label th:for="'filtercheckbox' + ${location.locationId}" th:text="${location.locationName}"></label>
-                                    <input th:id="'filtercheckbox' + ${location.locationId}" type="checkbox" name="checkboxesLocation"  th:value="${location.locationId}" th:checked="checked"/>  <br/>
+                                    <label th:for="'filtercheckbox' + ${location.locationId}"
+                                           th:text="${location.locationName}"></label>
+                                    <input th:id="'filtercheckbox' + ${location.locationId}" type="checkbox"
+                                           name="checkboxesLocation" th:value="${location.locationId}"
+                                           th:checked="checked"/> <br/>
                                 </th:block>
-                                <input name="filterLocations" type="button" value="Filtrér lokationer" class="btn-green filter"/>
+                                <input name="filterLocations" type="button" value="Filtrér lokationer"
+                                       class="btn-green filter"/>
                             </form>
                         </div>
                     </div>
@@ -61,9 +65,6 @@
         </div>
         <div class="col-2"></div>
     </div>
-
 </div>
-
-
 </body>
 </html>

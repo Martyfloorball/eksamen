@@ -1,120 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Ny vagt</title>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="lib/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
+    <title>Ny vagt</title>
 
-        <!---CSS--->
-        <link rel="stylesheet" href="css/layout.css" type="text/css"/>
+    <!---CSS--->
+    <link rel="stylesheet" href="css/layout.css" type="text/css"/>
 
-        <!---JQUERY--->
-        <script src="lib/jquery/jquery-3.3.1.min.js"></script>
-    </head>
-    <body>
-    <div th:replace="includes/topMenu::topMenu"></div>
-        <form method="post" th:action="@{/vagtplan}" class="createShiftForm">
-            <table class="popup-table createNewShift">
-                <tr>
-                    <td class="header">Opret Vagt</td>
-                    <td class="header">
-                        <button type="button" class="pull-right bg-white cancelCreateNewShift"><i
-                                class="fas fa-times"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="chooseDate" for="chooseDate">Dato</label>
-                    </td>
-                    <td>
-                        <input class="date-start" id="chooseDate" type="date"/>
-                        <input class="date-end" type="date"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <div class="weekDays">
-                            <input id="weekDaySun" type="checkbox" class="weekDay">
-                            <label for="weekDaySun">
-                                <small>S</small>
-                            </label>
-                            <input id="weekDaySat" type="checkbox" class="weekDay">
-                            <label for="weekDaySat">
-                                <small>L</small>
-                            </label>
-                            <input id="weekDayFri" type="checkbox" class="weekDay">
-                            <label for="weekDayFri">
-                                <small>F</small>
-                            </label>
-                            <input id="weekDayThu" type="checkbox" class="weekDay">
-                            <label for="weekDayThu">
-                                <small>T</small>
-                            </label>
-                            <input id="weekDayWen" type="checkbox" class="weekDay">
-                            <label for="weekDayWen">
-                                <small>O</small>
-                            </label>
-                            <input id="weekDayTue" type="checkbox" class="weekDay">
-                            <label for="weekDayTue">
-                                <small>T</small>
-                            </label>
-                            <input id="weekDayMon" type="checkbox" class="weekDay">
-                            <label for="weekDayMon">
-                                <small>M</small>
-                            </label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+    <!---JQUERY--->
+    <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div th:replace="includes/topMenu::topMenu"></div>
+<div class="row createNewShift margin-top-65px">
+    <div class="col-2"></div>
+    <div class="col-8 box">
+        <div class="row">
+            <div class="col-12">
+                <div class="box-header"><h2>Opret Vagt</h2></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6">
+                    <label class="chooseDate" for="chooseDate">Dato</label>
+                </div>
+                <div class="col-6">
+                    <input class="date-start" id="chooseDate" type="date"/>
+                    <input class="date-end" type="date"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <div class="weekDays">
+                        <input id="weekDayMon" type="checkbox" class="weekDay">
+                        <label for="weekDayMon">
+                            <small>M</small>
+                        </label>
+                        <input id="weekDayTue" type="checkbox" class="weekDay">
+                        <label for="weekDayTue">
+                            <small>T</small>
+                        </label>
+                        <input id="weekDayWen" type="checkbox" class="weekDay">
+                        <label for="weekDayWen">
+                            <small>O</small>
+                        </label>
+                        <input id="weekDayThu" type="checkbox" class="weekDay">
+                        <label for="weekDayThu">
+                            <small>T</small>
+                        </label>
+                        <input id="weekDayFri" type="checkbox" class="weekDay">
+                        <label for="weekDayFri">
+                            <small>F</small>
+                        </label>
+                        <input id="weekDaySat" type="checkbox" class="weekDay">
+                        <label for="weekDaySat">
+                            <small>L</small>
+                        </label>
+                        <input id="weekDaySun" type="checkbox" class="weekDay">
+                        <label for="weekDaySun">
+                            <small>S</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
                         <label for="time-start">Tid</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-6">
                         <input id="time-start" type="time" value="00:00"/>
                         <input id="time-end" type="time" value="00:00"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
                         <label for="repeat">Gentag vagt</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-6">
                         <input id="repeat" type="checkbox">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
                         <label for="chooseLocation">Anlæg</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-6">
                         <select id="chooseLocation">
                             <option value="choose">Vælg Anlæg...</option>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
                         <label for="chooseEmployee">Medarbejder</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-6">
                         <select id="chooseEmployee">
                             <option value="choose">Vælg Medarbejder...</option>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
                         <label for="comment">Bemærkninger</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-6">
                         <textarea id="comment" type="text" placeholder="Indtast Bemærkning..."></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input name="saveShift" type="submit" value="Opret" class="btn-green"/></td>
-                </tr>
-            </table>
-        </form>
-    </body>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-6">
+                        <input name="saveShift" type="submit" value="Opret" class="btn-green"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+</body>
 </html>
