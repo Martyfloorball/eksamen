@@ -2,7 +2,9 @@ package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Base.Shift;
+import com.eksamen.eksamen.Base.Staff;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
+import com.eksamen.eksamen.StaffService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,8 @@ public class ShiftController {
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
+    model.addAttribute("locations", StaffService.getLocations());
+    model.addAttribute("staffs", getStaff());
     return"/createShift";
   }
 
@@ -203,5 +207,27 @@ public class ShiftController {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  //Method that gets staff from the database.
+  public ArrayList<Staff> getStaff(){
+    ArrayList<Staff> staffs = new ArrayList<>();
+
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select staff_id, firstname, lastname" +
+            "from staff");
+
+    try {
+      //adding staff to an arraylist
+      //resultSet.next();
+      while (resultSet.next()) {
+        staffs.add(new Staff(resultSet.getInt("staff_id"),
+                resultSet.getString("firstname"),
+                resultSet.getString("lastname")));
+      }
+      resultSet.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return staffs;
   }
 }

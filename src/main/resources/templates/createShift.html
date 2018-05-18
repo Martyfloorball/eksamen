@@ -108,6 +108,9 @@
                     <div class="col-6">
                         <select id="chooseEmployee">
                             <option value="0" disabled selected hidden>Vælg Medarbejder...</option>
+                            <option th:each="staff : ${staffs}"
+                                    th:value="${staff.staffId}"
+                                    th:text="${staff.firstname} + ' ' + ${staff.lastname}"></option>
                         </select>
                     </div>
                 </div>

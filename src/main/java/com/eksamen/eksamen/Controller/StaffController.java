@@ -17,10 +17,6 @@ import java.util.ArrayList;
 @Controller
 public class StaffController {
 
-  /**
-   * @author Mike Jahn
-   * @author Martin Jensen
-   * */
   @GetMapping("/medarbejderliste")
   public String employeeList(Model model) {
     model.addAttribute("employee", new Staff());
@@ -28,14 +24,11 @@ public class StaffController {
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
+
     return "employeeList";
   }
 
-  /**
-   * This method saves a new staff employee to database
-   *
-   * @author Martin Jensen
-   */
+  //This method saves a new staff employee to database
   @PostMapping(value = "/medarbejderliste", params = "saveEmployee=Opret")
   public String addEmployee(@RequestParam("checkboxes") int[] locationId, @ModelAttribute Staff staff) {
     try {
@@ -77,14 +70,13 @@ public class StaffController {
     return "redirect:/medarbejderliste";
   }
 
-  /**
-   * @author Mike Jahn
-   * @author Martin Jensen
-   * */
   @GetMapping("/medarbejder")
   public String editStaff(Model model, @RequestParam String email) {
     model.addAttribute("employee", StaffService.getStaff(email));
     model.addAttribute("locations", StaffService.getLocations());
+    model.addAttribute("isAdmin", Session.isAdmin());
+    model.addAttribute("isWorker", Session.isWorker());
+    model.addAttribute("isLeader", Session.isLeader());
 
     //An arraylist with true/false on the locations the employee has
     ArrayList boo = new ArrayList();
@@ -102,11 +94,7 @@ public class StaffController {
     return "staffEdit";
   }
 
-  /**
-   * Method that edits an employee and saves the changes to the database.
-   *
-   * @author Martin Jensen
-   */
+  //Method that edits an employee and saves the changes to the database.
   @PostMapping(value = "/medarbejder", params = "editEmployee=Save")
   public String editEmployee(@RequestParam("checkboxes") int[] locationId, @ModelAttribute Staff staff) {
 
@@ -137,11 +125,7 @@ public class StaffController {
     return "redirect:/medarbejderliste";
   }
 
-  /**
-   * Method that deletes an employee from the database.
-   *
-   * @author Martin Jensen
-   */
+  //Method that deletes an employee from the database.
   @PostMapping(value = "/medarbejder", params = "deleteEmployee=Slet")
   public String deleteEmployee() {
     //Removing current locations for an employee
@@ -154,14 +138,5 @@ public class StaffController {
     StaffService.deleteForEmployee("staff","staff_id");
 
     return "redirect:/medarbejderliste";
-  }
-
-  public ArrayList<Employee> getEmployees(){
-    ArrayList<Employees> employees = new ArrayList<>();
-
-    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select staff_id, firstname, lastname" +
-            "from staff ");
-
-    return employees;
   }
 }
