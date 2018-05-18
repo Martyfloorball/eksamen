@@ -7,9 +7,7 @@ import com.eksamen.eksamen.Handler.DatabaseHandler;
 import com.eksamen.eksamen.StaffService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +29,44 @@ public class ShiftController {
     model.addAttribute("isLeader", Session.isLeader());
     model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("staffs", getStaff());
+    model.addAttribute("shift", new Shift());
     return"/createShift";
+  }
+
+  @PostMapping(value = "/createShift")
+  public String addShift(@RequestParam int location, @RequestParam int staffId, @ModelAttribute Shift shift){
+    try{
+
+      if(shift.getStaffId() != 0){
+        shift.setApproved(Session.getId());
+      }
+      if(shift.getEnd_date().equals("")){
+        shift.setEnd_date(shift.getStart_date());
+      }
+
+      DatabaseHandler.getInstance().insert(
+              "shift",
+              new String[]{"comment", "approved_by", "start_time", "end_time", "fk_location_id"},
+              new ArrayList(Arrays.asList(
+                      shift.getComment(),
+                      shift.getApproved(),
+                      shift.getStart_date() + " " + shift.getStart_time() + ":00",
+                      shift.getEnd_date() + " " + shift.getEnd_time() + ":00",
+                      location)));
+
+      if(staffId != 0){
+        ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select shift_id from shift order by shift_id desc limit 1");
+        resultSet.next();
+        DatabaseHandler.getInstance().insert(
+                "shift_request",
+                new String[]{"chosen", "fk_staff_id", "fk_shift_id"},
+                new ArrayList(Arrays.asList(1, staffId, resultSet.getInt("shift_id"))));
+      }
+    }catch(Exception e) {
+      e.printStackTrace();
+    }
+
+    return "redirect:/vagtplan";
   }
 
   @RequestMapping("/vagtplan/{action}")

@@ -11,7 +11,7 @@
 
     <!---JQUERY--->
     <script src="lib/jquery/jquery-3.3.1.min.js"></script>
-    <script src="js/schedule.js"></script>
+    <script src="js/shift.js"></script>
 
 </head>
 <body>
@@ -19,121 +19,123 @@
 <div class="row createNewShift margin-top-65px">
     <div class="col-2"></div>
     <div class="col-8 box">
-        <div class="row">
-            <div class="col-12">
-                <div class="box-header"><h2>Opret Vagt</h2></div>
-            </div>
-        </div>
-        <div class="col-12">
+        <form method="post" th:action="@{createShift}">
             <div class="row">
-                <div class="col-6">
-                    <label class="chooseDate" for="chooseDate">Dato</label>
-                </div>
-                <div class="col-6">
-                    <input class="date-start" id="chooseDate" type="date"/>
-                    <input class="date-end" type="date"/>
-                    <div class="weekDays">
-                        <input id="weekDayMon" type="checkbox" class="weekDay">
-                        <label for="weekDayMon">
-                            <small>M</small>
-                        </label>
-                        <input id="weekDayTue" type="checkbox" class="weekDay">
-                        <label for="weekDayTue">
-                            <small>T</small>
-                        </label>
-                        <input id="weekDayWen" type="checkbox" class="weekDay">
-                        <label for="weekDayWen">
-                            <small>O</small>
-                        </label>
-                        <input id="weekDayThu" type="checkbox" class="weekDay">
-                        <label for="weekDayThu">
-                            <small>T</small>
-                        </label>
-                        <input id="weekDayFri" type="checkbox" class="weekDay">
-                        <label for="weekDayFri">
-                            <small>F</small>
-                        </label>
-                        <input id="weekDaySat" type="checkbox" class="weekDay">
-                        <label for="weekDaySat">
-                            <small>L</small>
-                        </label>
-                        <input id="weekDaySun" type="checkbox" class="weekDay">
-                        <label for="weekDaySun">
-                            <small>S</small>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-6">
-                        <label for="time-start">Tid</label>
-                    </div>
-                    <div class="col-6">
-                        <input id="time-start" type="time" value="00:00"/>
-                        <input id="time-end" type="time" value="00:00"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-6">
-                        <input id="repeat" type="checkbox"> Gentag vagt
-                    </div>
+                <div class="col-12">
+                    <div class="box-header"><h2>Opret Vagt</h2></div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="row">
                     <div class="col-6">
-                        <label for="chooseLocation">Anlæg</label>
+                        <label class="chooseDate" for="chooseDate">Dato</label>
                     </div>
                     <div class="col-6">
-                        <select id="chooseLocation">
-                            <option value="0" disabled selected hidden>Vælg Anlæg...</option>
-                            <option th:each="location : ${locations}"
-                            th:value="${location.locationId}"
-                            th:text="${location.locationName}"></option>
-                        </select>
+                        <input class="date-start" id="chooseDate" type="date" th:field="${shift.start_date}"/>
+                        <input class="date-end" type="date" th:field="${shift.end_date}"/>
+                        <div class="weekDays">
+                            <input id="weekDayMon" type="checkbox" class="weekDay" value="1" name="weekDays">
+                            <label for="weekDayMon">
+                                <small>M</small>
+                            </label>
+                            <input id="weekDayTue" type="checkbox" class="weekDay" value="2" name="weekDays">
+                            <label for="weekDayTue">
+                                <small>T</small>
+                            </label>
+                            <input id="weekDayWen" type="checkbox" class="weekDay" value="3" name="weekDays">
+                            <label for="weekDayWen">
+                                <small>O</small>
+                            </label>
+                            <input id="weekDayThu" type="checkbox" class="weekDay" value="4" name="weekDays">
+                            <label for="weekDayThu">
+                                <small>T</small>
+                            </label>
+                            <input id="weekDayFri" type="checkbox" class="weekDay" value="5" name="weekDays">
+                            <label for="weekDayFri">
+                                <small>F</small>
+                            </label>
+                            <input id="weekDaySat" type="checkbox" class="weekDay" value="6" name="weekDays">
+                            <label for="weekDaySat">
+                                <small>L</small>
+                            </label>
+                            <input id="weekDaySun" type="checkbox" class="weekDay" value="7" name="weekDays">
+                            <label for="weekDaySun">
+                                <small>S</small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="time-start">Tid</label>
+                        </div>
+                        <div class="col-6">
+                            <input id="time-start" type="time" value="00:00" th:field="${shift.start_time}"/>
+                            <input id="time-end" type="time" value="00:00" th:field="${shift.end_time}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <input id="repeat" type="checkbox"> Gentag vagt
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="chooseLocation">Anlæg</label>
+                        </div>
+                        <div class="col-6">
+                            <select id="chooseLocation" name="location" >
+                                <option value="0" disabled selected hidden required>Vælg Anlæg...</option>
+                                <option th:each="location : ${locations}"
+                                        th:value="${location.locationId}"
+                                        th:text="${location.locationName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="chooseEmployee">Medarbejder</label>
+                        </div>
+                        <div class="col-6">
+                            <select id="chooseEmployee" name="staffId">
+                                <option value="0" selected>Vælg Medarbejder/Ledig Vagt...</option>
+                                <option th:each="staff : ${staffs}"
+                                        th:value="${staff.staffId}"
+                                        th:text="${staff.firstName} + ' ' + ${staff.lastName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="comment">Bemærkninger</label>
+                        </div>
+                        <div class="col-6">
+                            <textarea th:field="${shift.comment}" id="comment" type="text" placeholder="Indtast Bemærkning..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <input name="saveShift" type="submit" value="Opret" class="btn-green"/>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-6">
-                        <label for="chooseEmployee">Medarbejder</label>
-                    </div>
-                    <div class="col-6">
-                        <select id="chooseEmployee">
-                            <option value="0" disabled selected hidden>Vælg Medarbejder...</option>
-                            <option th:each="staff : ${staffs}"
-                                    th:value="${staff.staffId}"
-                                    th:text="${staff.firstName} + ' ' + ${staff.lastName}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-6">
-                        <label for="comment">Bemærkninger</label>
-                    </div>
-                    <div class="col-6">
-                        <textarea id="comment" type="text" placeholder="Indtast Bemærkning..."></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-6">
-                        <input name="saveShift" type="submit" value="Opret" class="btn-green"/>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
     <div class="col-2"></div>
 </div>

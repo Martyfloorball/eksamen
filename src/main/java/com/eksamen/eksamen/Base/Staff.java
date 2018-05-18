@@ -21,6 +21,7 @@ public class Staff {
     this.staffNiveau = staffNiveau;
   }
 
+
   public Staff(int staffId, String firstName, String lastName){
     this.staffId = staffId;
     this.firstName = firstName;

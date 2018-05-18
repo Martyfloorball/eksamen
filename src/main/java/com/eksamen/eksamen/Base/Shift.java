@@ -25,6 +25,18 @@ public class Shift {
         this.staffName = staffName;
     }
 
+    public Shift(String comment, int approved, String start_date, String start_time, String end_date, String end_time, int staffId) {
+        this.comment = comment;
+        this.approved = approved;
+        this.start_date = start_date;
+        this.start_time = start_time;
+        this.end_date = end_date;
+        this.end_time = end_time;
+        this.staffId = staffId;
+    }
+
+    public Shift() {}
+
     public int getId() {
         return id;
     }
