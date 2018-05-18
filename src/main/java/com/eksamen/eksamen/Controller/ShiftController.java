@@ -161,14 +161,14 @@ public class ShiftController {
       //Egne vagter
       date = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
       ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
-              "SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen = '"+Session.getId()+"' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id = '"+Session.getId()+"'"
+              "SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen = '1' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id = '"+Session.getId()+"'"
       );
       addShift(i, resultSet, returnArray);
 
       //Andre vagter
       date = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
       ResultSet resultSet2 = DatabaseHandler.getInstance().querySelect(
-              "SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen != '"+Session.getId()+"' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id != '"+Session.getId()+"'"
+              "SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen != '1' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id != '"+Session.getId()+"'"
       );
       //System.out.println("SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen != '"+Session.getId()+"' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id != '"+Session.getId()+"'");
       addShift(i, resultSet2, returnArray);

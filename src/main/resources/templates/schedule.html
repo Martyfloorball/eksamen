@@ -14,6 +14,13 @@
         <script src="lib/jquery/jquery-3.3.1.min.js"></script>
 
         <style>
+
+            html, body {
+                position: relative;
+                height: 100%;
+                width: 100%;
+            }
+
             #plan-menu {
 
                 padding: 15px;
@@ -99,13 +106,17 @@
                 border-bottom: 2px solid #666;
             }
 
+            #month-viewer .days {
+                min-height: 150px;
+            }
+
             #month-viewer .days .day {
                 float: left;
                 width: calc(100% / 7);
                 background-color: #fff;
                 border-bottom: 1px solid #666;
                 padding: 15px;
-                min-height: 150px;
+                height: 100%;
             }
 
             #month-viewer .days .day.disabled {
@@ -195,7 +206,9 @@
                             <p class="date" th:text="${dates[i + 1]}"></p>
                             <div class="shifts">
                                 <div class="shift" th:each="shift : ${shifts[i + 1]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
-                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="time" th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="location" th:text="${shift.location}"></p>
+                                    <p class="staff" th:text="${shift.staffName}"></p>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +216,9 @@
                             <p class="date" th:text="${dates[i + 2]}"></p>
                             <div class="shifts">
                                 <div class="shift" th:each="shift : ${shifts[i + 2]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
-                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="time" th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="location" th:text="${shift.location}"></p>
+                                    <p class="staff" th:text="${shift.staffName}"></p>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +226,9 @@
                             <p class="date" th:text="${dates[i + 3]}"></p>
                             <div class="shifts">
                                 <div class="shift" th:each="shift : ${shifts[i + 3]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
-                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="time" th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="location" th:text="${shift.location}"></p>
+                                    <p class="staff" th:text="${shift.staffName}"></p>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +236,9 @@
                             <p class="date" th:text="${dates[i + 4]}"></p>
                             <div class="shifts">
                                 <div class="shift" th:each="shift : ${shifts[i + 4]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
-                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="time" th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="location" th:text="${shift.location}"></p>
+                                    <p class="staff" th:text="${shift.staffName}"></p>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +246,9 @@
                             <p class="date" th:text="${dates[i + 5]}"></p>
                             <div class="shifts">
                                 <div class="shift" th:each="shift : ${shifts[i + 5]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
-                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="time" th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="location" th:text="${shift.location}"></p>
+                                    <p class="staff" th:text="${shift.staffName}"></p>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +256,9 @@
                             <p class="date" th:text="${dates[i + 6]}"></p>
                             <div class="shifts">
                                 <div class="shift" th:each="shift : ${shifts[i + 6]}" th:if="${shift.approved} != 0 AND ${shift.staffId} == ${myID}">
-                                    <p th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="time" th:text="${shift.start_time}+' '+${shift.end_time}"></p>
+                                    <p class="location" th:text="${shift.location}"></p>
+                                    <p class="staff" th:text="${shift.staffName}"></p>
                                 </div>
                             </div>
                         </div>
