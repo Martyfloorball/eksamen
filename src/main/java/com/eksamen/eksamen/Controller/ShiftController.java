@@ -1,12 +1,17 @@
 package com.eksamen.eksamen.Controller;
 
 import com.eksamen.eksamen.Base.Session;
+import com.eksamen.eksamen.Base.Shift;
+import com.eksamen.eksamen.Handler.DatabaseHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -53,6 +58,8 @@ public class ShiftController {
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
+    model.addAttribute("shifts", getShifts(calendar));
+    model.addAttribute("myID", Session.getId());
     return "schedule";
   }
 
@@ -132,5 +139,69 @@ public class ShiftController {
     calendar.add(Calendar.DAY_OF_MONTH, -1);
 
     return daysToPrint;
+  }
+
+  private ArrayList<Shift>[] getShifts(Calendar calendar) {
+    ArrayList<Shift>[] returnArray = new ArrayList[42];
+
+    //Gå en måned tilbage
+    calendar.add(Calendar.MONTH, -1);
+
+    //Find den sidste dato
+    calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+    //Gå tilbage til den sidste mandag
+    calendar.add(Calendar.DATE, -(calendar.get(Calendar.DAY_OF_WEEK) == 1 ? 6 : calendar.get(Calendar.DAY_OF_WEEK) - 2));
+
+    for(int i = 0; i < 42; i++) {
+      String date;
+
+      returnArray[i] = new ArrayList<>();
+
+      //Egne vagter
+      date = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+      ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
+              "SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen = '"+Session.getId()+"' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id = '"+Session.getId()+"'"
+      );
+      addShift(i, resultSet, returnArray);
+
+      //Andre vagter
+      date = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+      ResultSet resultSet2 = DatabaseHandler.getInstance().querySelect(
+              "SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen != '"+Session.getId()+"' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id != '"+Session.getId()+"'"
+      );
+      //System.out.println("SELECT * FROM shift INNER JOIN location ON fk_location_id = location_id INNER JOIN shift_request ON fk_shift_id = shift_id INNER JOIN staff ON fk_staff_id = staff_id WHERE chosen != '"+Session.getId()+"' AND start_time >= '"+date+" 00:00:00' AND end_time <= '"+date+" 23:59:59' AND staff_id != '"+Session.getId()+"'");
+      addShift(i, resultSet2, returnArray);
+
+      //Ledige vagter
+
+      //Til næste dag
+      calendar.add(Calendar.DATE, 1);
+    }
+
+    calendar.add(Calendar.MONTH, -1);
+
+    System.out.println(Arrays.toString(returnArray));
+    return returnArray;
+  }
+
+  private void addShift(int i, ResultSet resultSet, ArrayList<Shift>[] returnArray) {
+    try {
+      while(resultSet.next()) {
+        returnArray[i].add(new Shift(
+                resultSet.getInt("shift_id"),
+                resultSet.getString("comment"),
+                resultSet.getInt("approved_by"),
+                String.valueOf(resultSet.getDate("start_time")),
+                String.valueOf(resultSet.getTime("start_time")),
+                String.valueOf(resultSet.getDate("end_time")),
+                String.valueOf(resultSet.getTime("end_time")),
+                resultSet.getString("location_name"),
+                resultSet.getInt("staff_id"),
+                resultSet.getString("firstname")+" "+resultSet.getString("lastname")));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }

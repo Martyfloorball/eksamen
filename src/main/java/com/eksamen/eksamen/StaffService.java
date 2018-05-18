@@ -12,18 +12,21 @@ import java.util.ArrayList;
 public class StaffService {
   public static int getIdForStaff = 0;
 
-  /*
-  Method to get all the locations in the database into an array
-  */
+  /**
+   * Method to get all the locations in the database into an array.
+   *
+   * @author Martin Jensen
+   */
   public static ArrayList<Location> getLocations() {
     ArrayList<Location> locations = new ArrayList();
 
-    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select location_id, location_name\n" +
-        "from location inner join staff_location l on location.location_id = l.fk_location_id\n" +
-        "inner join staff s on l.fk_staff_id = s.staff_id\n" +
-        "where staff_id = " + Session.getId());
+    ResultSet resultSet = DatabaseHandler.getInstance().querySelect("SELECT location_id, location_name\n" +
+        "FROM location INNER JOIN staff_location l ON location.location_id = l.fk_location_id\n" +
+        "INNER JOIN staff s ON l.fk_staff_id = s.staff_id\n" +
+        "WHERE staff_id = " + Session.getId());
 
     try {
+      //adding the locations to an arraylist
       while (resultSet.next()) {
         locations.add(new Location(resultSet.getInt("location_id"), resultSet.getString("location_name")));
       }
@@ -31,10 +34,14 @@ public class StaffService {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
     return locations;
   }
 
+  /**
+   * Method that get the employee id through a query select that searches on the email.
+   *
+   * @author Martin Jensen
+   * */
   public static int getEmployeeId(String email) {
 
     ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
@@ -47,6 +54,7 @@ public class StaffService {
     try {
       resultSet.next();
 
+      //Sets the static field
       getIdForStaff = resultSet.getInt("staff_id");
 
       resultSet.close();
@@ -58,6 +66,10 @@ public class StaffService {
     return getIdForStaff;
   }
 
+  /**
+   * A method that gets staff information.
+   *
+   * @author Martin Jensen*/
   public static Staff getStaff(String email) {
     Staff staffEdit = new Staff();
 
@@ -87,8 +99,10 @@ public class StaffService {
     return staffEdit;
   }
 
-  /*
+  /**
    * Removes employee from database
+   *
+   * @author Martin Jensen
    */
   public static void deleteForEmployee(String table, String condition){
     DatabaseHandler.getInstance().delete(
@@ -98,9 +112,11 @@ public class StaffService {
     );
   }
 
-  /*
-  * Method to get the employees locations
-  */
+  /**
+   * Method to get the employees locations
+   *
+   * @author Martin Jensen
+   */
   public static ArrayList getCurrentLocations(){
     ArrayList<Integer> currentLocations = new ArrayList<>();
     System.out.println(getIdForStaff);
