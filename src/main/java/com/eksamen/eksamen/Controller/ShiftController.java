@@ -22,28 +22,34 @@ public class ShiftController {
   private boolean isMonthShown = true;
   private String[] months = {"Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"};
 
+  //Henter formular for opret ny vagt
   @GetMapping("/createShift")
   public String createNewShift(Model model){
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
+    //Henter anlæg i databasen og sender med til HTML
     model.addAttribute("locations", StaffService.getLocations());
+    //Henter medarbejdere og sender med til HTML
     model.addAttribute("staffs", getStaff());
+    //Opretter shift objekt til data fra opret vagt
     model.addAttribute("shift", new Shift());
     return"/createShift";
   }
 
+  //Gemmer vagt i databasen
   @PostMapping(value = "/createShift")
   public String addShift(@RequestParam int location, @RequestParam int staffId, @ModelAttribute Shift shift){
     try{
-
+      //Hvis der er valgt medarbejder, sættes vagten som godkendt, af den person der er logget ind
       if(shift.getStaffId() != 0){
         shift.setApproved(Session.getId());
       }
+      //Hvis der ikke er indtastet slutdato, sættes den til startdato
       if(shift.getEnd_date().equals("")){
         shift.setEnd_date(shift.getStart_date());
       }
-
+      //Data indsættes i arraylist, og overføres til databasen
       DatabaseHandler.getInstance().insert(
               "shift",
               new String[]{"comment", "approved_by", "start_time", "end_time", "fk_location_id"},
@@ -53,7 +59,7 @@ public class ShiftController {
                       shift.getStart_date() + " " + shift.getStart_time() + ":00",
                       shift.getEnd_date() + " " + shift.getEnd_time() + ":00",
                       location)));
-
+      //Hvis der er valgt medarbejder, indsættes data i arraylist og overføres til databasen
       if(staffId != 0){
         ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select shift_id from shift order by shift_id desc limit 1");
         resultSet.next();
@@ -65,7 +71,7 @@ public class ShiftController {
     }catch(Exception e) {
       e.printStackTrace();
     }
-
+    //Returnerer til vagtplanen, når vagten er oprettet
     return "redirect:/vagtplan";
   }
 
@@ -244,15 +250,15 @@ public class ShiftController {
     }
   }
 
-  //Method that gets staff from the database.
+  //Henter medarbejdere fra databasen
   public ArrayList<Staff> getStaff(){
     ArrayList<Staff> staffs = new ArrayList<>();
 
+    //Henter id og navn i databasen for alle ansatte
     ResultSet resultSet = DatabaseHandler.getInstance().querySelect("select staff_id, firstname, lastname from staff");
 
     try {
-      //adding staff to an arraylist
-      //resultSet.next();
+      //Tilføjer ansatte til arraylist
       while (resultSet.next()) {
         staffs.add(new Staff(resultSet.getInt("staff_id"),
                 resultSet.getString("firstname"),
