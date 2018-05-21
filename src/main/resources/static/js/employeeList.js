@@ -1,14 +1,6 @@
 $(document).ready(function (){
     getList();
 
-    $("#openCreateNewEmployee").click(function () {
-        $("#overlay, #createNewEmployee").show();
-    });
-
-    $("#cancelEmployeeCreate, #overlay").click(function () {
-        $("#overlay, .popup-formular").hide();
-    });
-
     $("input[name=filterLocations]").click(function () {
         getList();
     });

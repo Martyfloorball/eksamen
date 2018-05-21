@@ -15,9 +15,6 @@
 <body>
 
 <div th:replace="/includes/topMenu::topMenu"></div>
-<div th:replace="/createEmployee::createNewEmployee"></div>
-<div id="overlay"></div>
-
 
 <div class="container margin-top-65px">
     <div class="row padding-0">
@@ -26,8 +23,9 @@
                 <div class="container">
                     <div>
                         <div>
-                            <button type="button" class="btn-green createNewEmployee"  th:if="${isAdmin}"
-                                    id="openCreateNewEmployee">Opret Medarbejder</button>
+
+                                <a href="/opretmedarbejder" class="btn-green createNewEmployee">Opret Medarbejder</a>
+
                         </div>
                     </div>
                 </div>

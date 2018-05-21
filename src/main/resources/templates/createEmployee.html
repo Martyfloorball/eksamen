@@ -1,74 +1,106 @@
-<div id="createNewEmployee" class="popup-formular box-body" th:fragment="createNewEmployee"
-     xmlns:th="http://www.w3.org/1999/xhtml">
-    <form method="post" th:action="@{/medarbejderliste}" id="createEmployeeForm">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
 
-        <table class="popup-table">
-            <tr>
-                <td></td>
-                <td>
-                    <button id="cancelEmployeeCreate" type="button" class="pull-right bg-white"><i
-                            class="fas fa-times"></i></button>
-                </td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <td><label for="employeeFirstName">Fornavn:</label></td>
-                <td>
-                    <input id="employeeFirstName" name="firstName" type="text" th:field="${employee.firstName}"/>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="employeeLastName">Efternavn:</label></td>
-                <td>
-                    <input id="employeeLastName" name="lastName" type="text" th:field="${employee.lastName}"/>
-                </td>
-            </tr>
+    <link rel="stylesheet" href="lib/font-awesome/web-fonts-with-css/css/fontawesome-all.css">
+    <title>RKI | Opret ny medarbejder</title>
 
-            <tr>
-                <td><label for="employeePhoneNumber">Tlf. nr.:</label></td>
-                <td>
-                    <input id="employeePhoneNumber" name="phonenumber" type="text" th:field="${employee.phonenumber}"/>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="employeeEmail">Email:</label></td>
-                <td>
-                    <input id="employeeEmail" name="email" type="email" th:field="${employee.email}"/>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="employeePosition">Stilling:</label></td>
-                <td>
-                    <select id="employeePosition" name="staffPosition" class="pull-right"
-                            th:field="${employee.staffNiveau}">
-                        <option value="17">Medarbejder</option>
-                        <option value="16">Centerleder</option>
-                        <option value="15">Admin</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><label>Anlæg:</label></td>
-            </tr>
+    <!---CSS--->
+    <link rel="stylesheet" href="css/layout.css" type="text/css">
 
-                <th:block th:each="location : ${locations}">
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="checkbox" name="checkboxes" th:text="${location.locationName}" th:value="${location.locationId}" />
-                        </td>
-                    </tr>
-                </th:block>
-            <tr>
-                <td><label for="employeePassword">Adgangskode:</label></td>
-                <td>
-                    <input id="employeePassword" name="password" type="password" th:field="${employee.password}"/>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input name="saveEmployee" type="submit" value="Opret" class="btn-green createNewEmployee"/></td>
-            </tr>
-        </table>
-    </form>
+    <!---JQUERY--->
+    <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+<div th:replace="includes/topMenu::topMenu"></div>
+<div class="row createNewShift margin-top-65px">
+    <div class="col-2"></div>
+    <div class="col-8 box">
+        <form method="post" th:action="@{opretmedarbejder}">
+            <div class="row">
+                <div class="col-12">
+                    <div class="box-header"><h2>Opret Medarbejder</h2></div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="chooseDate" for="employeeFirstName">Fornavn</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="employeeFirstName" name="firstName" type="text" th:field="${employee.firstName}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="employeeLastName">Efternavn</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="employeeLastName" name="lastName" type="text" th:field="${employee.lastName}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="employeePhoneNumber">Tlf. Nr.</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="employeePhoneNumber" name="phonenumber" type="text"
+                               th:field="${employee.phonenumber}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="employeeEmail">Email</label>
+                    </div>
+                    <div class="col-6">
+                        <input id="employeeEmail" name="email" type="email" th:field="${employee.email}"/>
+                    </div>
+                </div>
+                <div class="col-12">
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="employeePosition">Stilling</label>
+                        </div>
+                        <div class="col-6">
+                            <select id="employeePosition" name="staffPosition" class="pull-right"
+                                    th:field="${employee.staffNiveau}">
+                                <option value="17">Medarbejder</option>
+                                <option value="16">Centerleder</option>
+                                <option value="15">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Anlæg</label>
+                        </div>
+                        <div class="col-6">
+                            <th:block th:each="location : ${locations}" >
+                                <input type="checkbox" name="checkboxes" th:text="${location.locationName}"
+                                       th:value="${location.locationId}"/> <br>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <input name="saveEmployee" type="submit" value="Opret" class="btn-green"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-2"></div>
 </div>
+</body>
+</html>

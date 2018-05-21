@@ -1,6 +1,5 @@
 package com.eksamen.eksamen.Controller;
 
-import com.eksamen.eksamen.Base.Location;
 import com.eksamen.eksamen.Base.Session;
 import com.eksamen.eksamen.Base.Staff;
 import com.eksamen.eksamen.Handler.DatabaseHandler;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Controller
@@ -28,8 +26,20 @@ public class StaffController {
     return "employeeList";
   }
 
+  //Create new employee
+  @GetMapping("/opretmedarbejder")
+  public String employee(Model model){
+    model.addAttribute("employee", new Staff());
+    model.addAttribute("locations", StaffService.getLocations());
+    model.addAttribute("isAdmin", Session.isAdmin());
+    model.addAttribute("isWorker", Session.isWorker());
+    model.addAttribute("isLeader", Session.isLeader());
+
+    return "createEmployee";
+  }
+
   //This method saves a new staff employee to database
-  @PostMapping(value = "/medarbejderliste", params = "saveEmployee=Opret")
+  @PostMapping(value = "/opretmedarbejder", params = "saveEmployee=Opret")
   public String addEmployee(@RequestParam("checkboxes") int[] locationId, @ModelAttribute Staff staff) {
     try {
       //Saving the new staff employee to the database.
