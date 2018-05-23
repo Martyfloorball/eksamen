@@ -12,13 +12,9 @@ import java.util.ArrayList;
 public class StaffService {
   public static int getIdForStaff = 0;
 
-  /**
-   * Method to get all the locations in the database into an array.
-   *
-   * @author Martin Jensen
-   */
+  // Method to get all the locations in the database into an array.
   public static ArrayList<Location> getLocations() {
-    ArrayList<Location> locations = new ArrayList();
+    ArrayList<Location> locations = new ArrayList<>();
 
     ResultSet resultSet = DatabaseHandler.getInstance().querySelect("SELECT location_id, location_name\n" +
         "FROM location INNER JOIN staff_location l ON location.location_id = l.fk_location_id\n" +
@@ -37,11 +33,9 @@ public class StaffService {
     return locations;
   }
 
-  /**
-   * Method that get the employee id through a query select that searches on the email.
-   *
-   * @author Martin Jensen
-   * */
+
+   // Method that get the employee id through a query select that searches on the email.
+
   public static int getEmployeeId(String email) {
 
     ResultSet resultSet = DatabaseHandler.getInstance().querySelect(
@@ -66,10 +60,7 @@ public class StaffService {
     return getIdForStaff;
   }
 
-  /**
-   * A method that gets staff information.
-   *
-   * @author Martin Jensen*/
+  // A method that gets staff information.
   public static Staff getStaff(String email) {
     Staff staffEdit = new Staff();
 
@@ -99,11 +90,7 @@ public class StaffService {
     return staffEdit;
   }
 
-  /**
-   * Removes employee from database
-   *
-   * @author Martin Jensen
-   */
+  // Removes employee from database
   public static void deleteForEmployee(String table, String condition){
     DatabaseHandler.getInstance().delete(
         "DELETE FROM "+
@@ -112,11 +99,7 @@ public class StaffService {
     );
   }
 
-  /**
-   * Method to get the employees locations
-   *
-   * @author Martin Jensen
-   */
+  // Method to get the employees locations
   public static ArrayList getCurrentLocations(){
     ArrayList<Integer> currentLocations = new ArrayList<>();
 
@@ -135,5 +118,23 @@ public class StaffService {
     }
 
     return currentLocations;
+  }
+
+  //An arraylist with true/false on the locations the employee has
+  public static ArrayList booleanCheckArray() {
+    ArrayList<Boolean> boo = new ArrayList<>(); // Boolean array with same length as amount of locations, true is locations an employee have
+    boolean bb = false; // The variable that get added to the boo array
+
+    // nested loop that check if any location id match any current location id, and add result to array
+    for (int i = 0; i < StaffService.getLocations().size(); i++){
+      for (Object j : StaffService.getCurrentLocations())
+        if(StaffService.getLocations().get(i).getLocationId() == Integer.parseInt(j.toString())){
+          bb = true;
+
+        }
+      boo.add(bb);
+      bb = false; //resetting to false value
+    }
+    return boo;
   }
 }
