@@ -17,6 +17,9 @@ public class StaffController {
 
   @GetMapping("/medarbejderliste")
   public String employeeList(Model model) {
+    //Tjekker om man er logget ind
+    if(!Session.isLoggedIn()) return "redirect:/login";
+
     model.addAttribute("employee", new Staff());
     model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("isAdmin", Session.isAdmin());
@@ -29,6 +32,9 @@ public class StaffController {
   //Create new employee
   @GetMapping("/opretmedarbejder")
   public String employee(Model model){
+    //Tjekker om man er logget ind
+    if(!Session.isLoggedIn()) return "redirect:/login";
+
     model.addAttribute("employee", new Staff());
     model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("isAdmin", Session.isAdmin());
@@ -82,6 +88,9 @@ public class StaffController {
 
   @GetMapping("/medarbejder")
   public String editStaff(Model model, @RequestParam String email) {
+    //Tjekker om man er logget ind
+    if(!Session.isLoggedIn()) return "redirect:/login";
+
     model.addAttribute("employee", StaffService.getStaff(email));
     model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("isAdmin", Session.isAdmin());

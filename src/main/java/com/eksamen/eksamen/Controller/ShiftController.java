@@ -25,6 +25,9 @@ public class ShiftController {
   //Henter formular for opret ny vagt
   @GetMapping("/createShift")
   public String createNewShift(Model model){
+    //Tjekker om man er logget ind
+    if(!Session.isLoggedIn()) return "redirect:/login";
+
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
@@ -34,7 +37,7 @@ public class ShiftController {
     model.addAttribute("staffs", getStaff());
     //Opretter shift objekt til data fra opret vagt
     model.addAttribute("shift", new Shift());
-    return"/createShift";
+    return "/createShift";
   }
 
   //Gemmer vagt i databasen
@@ -77,7 +80,9 @@ public class ShiftController {
 
   @RequestMapping("/vagtplan/{action}")
   public String change(@PathVariable("action") String action) {
-    System.out.println(action);
+    //Tjekker om man er logget ind
+    if(!Session.isLoggedIn()) return "redirect:/login";
+
     if (action.equals("next")) {
       if (isMonthShown) {
         calendar.add(Calendar.MONTH, 1);
@@ -96,7 +101,9 @@ public class ShiftController {
 
   @RequestMapping("/vagtplan")
   public String vagtplan(Model model){
-    System.out.println(Arrays.toString(getDates(calendar)));
+    //Tjekker om man er logget ind
+    if(!Session.isLoggedIn()) return "redirect:/login";
+
     model.addAttribute("dates", getDates(calendar));
     model.addAttribute("isDisabled", getDisabled(calendar));
     model.addAttribute("month_and_year", months[calendar.get(Calendar.MONTH)]+" "+calendar.get(Calendar.YEAR));

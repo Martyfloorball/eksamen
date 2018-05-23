@@ -16,6 +16,9 @@ import java.util.Calendar;
 public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
+        //Tjekker om man er logget ind
+        if(!Session.isLoggedIn()) return "redirect:/login";
+
         model.addAttribute("weekNames", getWeekNames());
         model.addAttribute("days", getDays());
         model.addAttribute("months", getMonths());
