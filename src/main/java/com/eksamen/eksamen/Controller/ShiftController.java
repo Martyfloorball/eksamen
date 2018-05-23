@@ -230,10 +230,10 @@ public class ShiftController {
     return returnArray;
   }
 
-  private void addShift(int i, ResultSet resultSet, ArrayList<Shift>[] returnArray) {
+  private void addShift(int index, ResultSet resultSet, ArrayList<Shift>[] returnArray) {
     try {
       while(resultSet.next()) {
-        returnArray[i].add(new Shift(
+        returnArray[index].add(new Shift(
                 resultSet.getInt("shift_id"),
                 resultSet.getString("comment"),
                 resultSet.getInt("approved_by"),

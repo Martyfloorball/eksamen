@@ -87,20 +87,7 @@ public class StaffController {
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
     model.addAttribute("isLeader", Session.isLeader());
-
-    //An arraylist with true/false on the locations the employee has
-    ArrayList boo = new ArrayList();
-    boolean bb = false;
-    for (int i = 0; i < StaffService.getLocations().size(); i++){
-      for (Object j : StaffService.getCurrentLocations())
-        if(StaffService.getLocations().get(i).getLocationId() == Integer.parseInt(j.toString())){
-          bb = true;
-
-        }
-      boo.add(bb);
-      bb = false; //resetting to false value
-    }
-    model.addAttribute("boo" , boo); //Adding the attribute to be used in the html
+    model.addAttribute("booleanCheckArray" , StaffService.booleanCheckArray());
     return "staffEdit";
   }
 

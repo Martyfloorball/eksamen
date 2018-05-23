@@ -63,7 +63,7 @@
                 <div class="col-6">
                     <div id="setLocation">
                         <th:block th:each="location, itrStat : ${locations}">
-                                <input th:checked="${boo[itrStat.index]}" type="checkbox" name="checkboxes" th:text="${location.locationName}"
+                                <input th:checked="${booleanCheckArray[itrStat.index]}" type="checkbox" name="checkboxes" th:text="${location.locationName}"
                                        th:value="${location.locationId}" />
                             <br>
                         </th:block>

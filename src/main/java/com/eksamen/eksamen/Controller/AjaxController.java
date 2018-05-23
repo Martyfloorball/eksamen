@@ -16,11 +16,7 @@ import java.util.ArrayList;
 @RestController
 public class AjaxController {
 
-  /**
-   * Method to get the employee list.
-   *
-   * @author Martin Jensen
-   * */
+  // Method to get the employee list.
   @PostMapping(value = "/getEmployees")
   public ArrayList getEmployeeList(@RequestParam("checkboxesLocation[]") int[] filterLocations) {
     ArrayList<ArrayList<String>> staffs = new ArrayList<>();
@@ -60,6 +56,11 @@ public class AjaxController {
     return staffs;
   }
 
+  /*
+  * Method that returns info for the user that is login
+  * The method return an 2d array ( fx. [[hans, hansen, hans@hansen.dk, 12345678, admin], [Rødovrehallen, islev badet]] ) because a user can have more then 1 location.
+  * Then javascript is used to add the info into the html
+  * */
   @PostMapping("/getProfile")
   public ArrayList<ArrayList<String>> getUser() {
 
@@ -67,6 +68,7 @@ public class AjaxController {
     ArrayList<String> temp = new ArrayList<>();
     ArrayList<String> temp2 = new ArrayList<>();
     int userID = Session.getId();
+    // Get info for user and added it to temp arrayet, when done adds it to user array.
     ResultSet userRS = DatabaseHandler.getInstance()
         .querySelect("select firstname, lastname, email, phone, niveau_name\n" +
             "from staff\n" +
@@ -81,6 +83,7 @@ public class AjaxController {
       userRS.close();
       user.add(temp);
 
+      // Get user locations and adds it to temp2, when done adds it to user array.
       ResultSet locationRS = DatabaseHandler.getInstance()
           .querySelect("select location_name from location\n" +
               "inner join staff_location l on location.location_id = l.fk_location_id\n" +
@@ -119,12 +122,9 @@ public class AjaxController {
     return userName;
   }
 
-  /**
-   * Query that gets the labels from the columns.
-   * It returns an arraylist with the values.
-   *
-   * @author Martin Jensen
-   * */
+
+   // Query that gets the labels from the columns.
+   // It returns an arraylist with the values.
   public ArrayList getColumnLabel(ArrayList columnLabels, String isAdmin) {
 
     try {
@@ -152,12 +152,10 @@ public class AjaxController {
     return columnLabels;
   }
 
-  /**
+  /*
    * These three methods are used to get the staffNiveau and initialize it in a new variable.
    * Then it makes a method call with parameter transfer
    * to the select statement.
-   *
-   * @Author Martin Jensen
    * */
   public ArrayList isAdmin(String isAdmin, String filter, ArrayList columnLabels, ArrayList staffs) {
     Admin admin = new Admin();
@@ -181,11 +179,9 @@ public class AjaxController {
     return staffs;
   }
 
-  /**
+  /*
    * This method makes a query with a select statement.
    * It takes some parameters so it can filter the select statement.
-   *
-   * @author Martin Jensen
    * */
   public ArrayList getEmpoyeesQuery(String isAdmin, String filter, ArrayList columnLabels, ArrayList staffs, int position){
     try {
