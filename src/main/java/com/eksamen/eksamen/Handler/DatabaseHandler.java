@@ -21,7 +21,6 @@ public class DatabaseHandler {
     private DatabaseHandler() {
         try {
             Class.forName(JDBC_DRIVER);
-
             connection = DriverManager.getConnection(DATABASE_URL, USERNAME,PASSWORD);
             statement = connection.createStatement();
         } catch (ClassNotFoundException e) {
@@ -52,23 +51,30 @@ public class DatabaseHandler {
         sql = sql.substring(0, sql.length()-1)+")";
 
         try {
+            //Sæt commit som falsk, vi ved ikke om sql vil lykkedes
             connection.setAutoCommit(false);
+            //Klargør preparedStatement
             preparedStatement = connection.prepareStatement(sql);
 
+            //Tjekker om første værdi er en arraylist
             if(values.get(0).getClass() == ArrayList.class) {
+                //Foreach arralistens indhold ud
                 for(Object arrayValues: values) {
                     int counter = 1;
 
                     for(Object value : (ArrayList)arrayValues) {
+                        //Tjek om værdien er et tal
                         if(value.getClass() == Integer.class) {
                             preparedStatement.setInt(counter, (Integer)value);
-                        } else if(value.getClass() == String.class) {
+                        } else if(value.getClass() == String.class) { //Tjek om værdien er en string
                             preparedStatement.setString(counter, (String)value);
                         }
                         counter++;
                     }
 
+                    //Fyr det afsted til databasen
                     preparedStatement.executeUpdate();
+                    //Commit til databasen, fortæl databasen at det gik godt
                     connection.commit();
                 }
             } else {
@@ -92,11 +98,6 @@ public class DatabaseHandler {
         }
     }
 
-    /**
-     * Update query
-     *
-     * @author Martin Jensen
-     * */
     public void update(String query) {
         try {
             statement.executeUpdate(query);
@@ -106,11 +107,6 @@ public class DatabaseHandler {
         }
     }
 
-    /**
-     * Delete query
-     *
-     * @author Martin Jensen
-     * */
     public void delete(String query) {
       try {
         statement.executeUpdate(query);
@@ -132,9 +128,9 @@ public class DatabaseHandler {
         return resultSet;
     }
 
-    public ResultSet selectAll(String table){
+    public ResultSet querySelect(String query){
         try {
-            resultSet = statement.executeQuery("select * from " + table);
+            resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Something went wrong!");
@@ -142,16 +138,6 @@ public class DatabaseHandler {
 
         return resultSet;
     }
-  public ResultSet querySelect(String query){
-    try {
-      resultSet = statement.executeQuery(query);
-    } catch (SQLException e) {
-        e.printStackTrace();
-      System.out.println("Something went wrong!");
-    }
-
-    return resultSet;
-  }
 
     public void close() {
         try {
