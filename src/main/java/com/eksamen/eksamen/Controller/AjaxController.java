@@ -198,18 +198,6 @@ public class AjaxController {
           " AND staff_niveau_id = " + position
       );
 
-      System.out.println("SELECT " +
-          "CONCAT(firstname, ' ', lastname) AS Navn, " +
-          isAdmin +
-          "location_name AS Anlæg, " +
-          "niveau_name AS Stilling " +
-          "FROM staff " +
-          "INNER JOIN staff_location l ON staff.staff_id = l.fk_staff_id " +
-          "INNER JOIN staff_niveau n ON staff.fk_staff_niveau_id = n.staff_niveau_id " +
-          "INNER JOIN location l2 ON l.fk_location_id = l2.location_id " +
-          "WHERE (" + filter +") "+
-          " AND staff_niveau_id = " + position );
-
       //Adds the employee information to the array
       while (rs.next()) {
         ArrayList<String> staff = new ArrayList<>();

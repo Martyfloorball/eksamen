@@ -21,7 +21,6 @@ public class StaffController {
     if(!Session.isLoggedIn()) return "redirect:/login";
     if(Session.getUserniveau() == 17) return "redirect:/";
 
-    model.addAttribute("employee", new Staff());
     model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
