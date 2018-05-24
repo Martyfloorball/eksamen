@@ -54,7 +54,7 @@ public class StaffController {
       ArrayList staffArrayList = new ArrayList();
       staffArrayList.add(staff.getFirstName());
       staffArrayList.add(staff.getLastName());
-      staffArrayList.add(new BCryptPasswordEncoder().encode(staff.getEmail() + staff.getPassword()));
+      staffArrayList.add(new BCryptPasswordEncoder().encode(staff.getEmail() + "test1234")); //hardcoded password
       staffArrayList.add(staff.getPhonenumber());
       staffArrayList.add(staff.getEmail());
       staffArrayList.add(staff.getStaffNiveau());
@@ -91,6 +91,8 @@ public class StaffController {
   public String editStaff(Model model, @RequestParam String email) {
     //Tjekker om man er logget ind
     if(!Session.isLoggedIn()) return "redirect:/login";
+    if(Session.isWorker()) return "redirect:/";
+    if(Session.isLeader()) return "redirect:/medarbejderliste";
 
     model.addAttribute("employee", StaffService.getStaff(email));
     model.addAttribute("locations", StaffService.getLocations());

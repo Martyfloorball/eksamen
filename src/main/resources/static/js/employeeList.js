@@ -25,7 +25,7 @@ function getList() {
             $.each(data[0], function (key, value) {
                 $('#table').append('<th align="left">' + value + '</th>')
             });
-          $('#table').append('<th align="left">' + 'Redigér' + '</th>');
+          $('#table').append('<th align="left" th:if="${isAdmin}">' + 'Redigér' + '</th>');
 
 
           for (var i = 1; i < data.length; i++) {

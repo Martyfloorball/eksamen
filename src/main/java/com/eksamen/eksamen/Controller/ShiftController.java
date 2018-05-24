@@ -27,6 +27,7 @@ public class ShiftController {
   public String createNewShift(Model model){
     //Tjekker om man er logget ind
     if(!Session.isLoggedIn()) return "redirect:/login";
+    if(Session.getUserniveau() == 17) return "redirect:/";
 
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
