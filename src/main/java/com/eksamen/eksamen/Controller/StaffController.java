@@ -19,6 +19,7 @@ public class StaffController {
   public String employeeList(Model model) {
     //Tjekker om man er logget ind
     if(!Session.isLoggedIn()) return "redirect:/login";
+    if(Session.getUserniveau() == 17) return "redirect:/";
 
     model.addAttribute("employee", new Staff());
     model.addAttribute("locations", StaffService.getLocations());
@@ -34,6 +35,7 @@ public class StaffController {
   public String employee(Model model){
     //Tjekker om man er logget ind
     if(!Session.isLoggedIn()) return "redirect:/login";
+    if(Session.getUserniveau() == 17) return "redirect:/";
 
     model.addAttribute("employee", new Staff());
     model.addAttribute("locations", StaffService.getLocations());
