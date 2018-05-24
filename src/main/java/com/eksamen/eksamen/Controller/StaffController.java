@@ -20,7 +20,6 @@ public class StaffController {
     //Tjekker om man er logget ind
     if(!Session.isLoggedIn()) return "redirect:/login";
 
-    model.addAttribute("employee", new Staff());
     model.addAttribute("locations", StaffService.getLocations());
     model.addAttribute("isAdmin", Session.isAdmin());
     model.addAttribute("isWorker", Session.isWorker());
