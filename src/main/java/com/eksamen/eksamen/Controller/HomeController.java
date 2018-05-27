@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 @Controller
 public class HomeController {
-    @GetMapping("/")
+    @GetMapping("/dashboard")
     public String index(Model model) {
         //Tjekker om man er logget ind
         if(!Session.isLoggedIn()) return "redirect:/login";

@@ -18,7 +18,7 @@ function getList() {
     $.ajax({
         type: "POST",
         data: {checkboxesLocation: filterLocations},
-        url: "/getEmployees",
+        url: "/RKI/getEmployees",
         success: function (data) {
             $('#table').empty();
 
@@ -33,7 +33,7 @@ function getList() {
                 $.each(data[i], function (key, value) {
                     string += '<td>' + value + '</td>'
                 });
-                string += "<td><a href='/medarbejder?email="+data[i][2]+"'><i class='fas fa-edit'></i></a></td>";
+                string += "<td><a href='/RKI/medarbejder?email="+data[i][2]+"'><i class='fas fa-edit'></i></a></td>";
                 string += '</tr>';
                 $('#table').append(string)
             }

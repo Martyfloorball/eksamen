@@ -6,7 +6,7 @@
     <groupId>com.eksamen</groupId>
     <artifactId>eksamen</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>eksamen</name>
     <description>Demo project for Spring Boot</description>
@@ -64,10 +64,16 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
     <build>
+        <finalName>RKI</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

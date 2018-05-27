@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $.ajax({
         type: "POST",
-        url: "/getProfile",
+        url: "/RKI/getProfile",
         success: function (data) {
             $("#fornavn").val(data[0][0]);
             $("#efternavn").val(data[0][1]);

@@ -26,7 +26,7 @@ public class SessionController {
         model.addAttribute("login-failure", failure);
         return "login";
       }else {
-        return "redirect:/";
+        return "dashboard";
       }
     }
 
@@ -62,7 +62,7 @@ public class SessionController {
           Session.setId(resultSet.getInt("staff_id"));
           Session.setUserniveau(resultSet.getInt("fk_staff_niveau_id"));
           failure = "";
-          return "redirect:/";
+          return "redirect:/dashboard";
         } else{
           failure = "Ugyldigt login";
         }
@@ -78,7 +78,7 @@ public class SessionController {
         model.addAttribute("forgot-failure", failure);
         return "forgot-password";
       }
-      return "redirect:/";
+      return "redirect:/login";
     }
 
     @PostMapping(value = "/forgot-password", params = "forgot-submit")
